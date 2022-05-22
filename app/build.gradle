@@ -3,7 +3,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "com.androlua"
+        applicationId "com.androlua.Z"
         minSdkVersion 18
         targetSdkVersion 23
         ndk {
@@ -33,9 +33,14 @@ android {
         }
     }
     productFlavors {
+		flavor {
+		}
     }
 }
 
 dependencies {
     implementation 'com.android.support:support-annotations:28.0.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    
+	
 }
