@@ -8,7 +8,8 @@ import "autotheme"
 
 help=[===[
 @关于@
-@AndroLua是基于LuaJava开发的安卓平台轻量级脚本编程语言工具，既具有Lua简洁优雅的特质，又支持绝大部分安卓API，可以使你在手机上快速编写小型应用。
+@ZAndrolua基于Androlua
+AndroLua是基于LuaJava开发的安卓平台轻量级脚本编程语言工具，既具有Lua简洁优雅的特质，又支持绝大部分安卓API，可以使你在手机上快速编写小型应用。
 官方QQ群：236938279(已满)
 http://jq.qq.com/?_wv=1027&k=dcofRr
 官方QQ2群：148389676
@@ -18,7 +19,7 @@ http://jq.qq.com/?_wv=1027&k=2Gqxcak
 http://c.tieba.baidu.com/mo/m?kw=androlua
 项目地址：
 https://github.com/nirenr/AndroLua_pro
-点击链接支持我的工作：
+点击链接支持Androlua作者的工作：
 https://qr.alipay.com/apt7ujjb4jngmu3z9a
 
 本程序使用了以下开源项目部分代码
@@ -61,10 +62,12 @@ jni
 @
 @软件基本操作@
 @工程结构
-init.lua 工程配置文件
+init.lua 工程配置文件，也可用于加载打包脚本
 main,lua 工程主入口文件
 layout.aly  工程默认创建的布局文件
-
+build_script/ 工程打包时用的打包脚本存放目录，不会打包进安装包
+so/ 工程打包时，用于存放用户自定义so文件的目录
+keys/ 用于存放用户自定义apk签名文件公私钥文件(注意里面的.pk8后缀名文件要改成testkey.pk8)
 菜单功能
 三角形 运行：执行当前工程
 左箭头 撤销：撤销输入的内容
@@ -173,6 +176,8 @@ Lua官网：
 http://www.lua.org
 Android 中文API：
 http://android.toolib.net/reference/packages.html
+lua核心思想:
+一切皆变量
 @
 @2，导入模块@
 @require "import"
@@ -340,6 +345,11 @@ function onTouchEvent(event)
     end
 支持onKeyDown,onKeyUp,onKeyLongPress,onTouchEvent
 函数必须返布尔值
+@
+@引入dex文件@
+@compile"相对于当前工程目录的路径和文件名"
+如:compile "tests.dex"
+引入dex文件后可以直接import已经导入的dex里的类
 @
 @9，使用数组与map@
 @数组
@@ -877,6 +887,14 @@ appver="1.0"
 packagename="com.androlua.demo"
 目录下icon.png替换图标，welcome.png替换启动图。
 打包使用debug签名。
+打包脚本的api参考:
+Softwareproject_dirs 获取当前打包的文件目录。
+function user_apsiner_a(tmp,apkpath)
+  end 替换打包使用打包函数。
+function user_apsiner_b(apkpath)
+                         --apk路径
+  end
+生成APP二次处理函数
 @
 @部分函数参考@
 @
@@ -1254,6 +1272,20 @@ newTimer(func, arg)
     mm=5
 
 @
+ @XA专属插件API@
+@
+添加菜单选项:xaplugmenu_fun("testss",function()
+      print("tests")
+      end)
+ 设置设置页面里头的git按钮事件api:
+function git_set_btn_onclick(当前打开文件,当前所在文件夹,当前工程项目)
+  
+  end
+获取设置文件信息:xase_get(key,如果key不存在时返回值)
+设置获取文件信息:xase_set(key,Value)
+打包事件:function Plug_inloading.pelf.Packs(当前文件，当前项目路径)
+  end
+    @
 ]===]
 activity.setTitle("帮助")
 activity.setTheme(autotheme())
@@ -1261,33 +1293,33 @@ activity.setTheme(autotheme())
 
 list={}
 for t,c in help:gmatch("(%b@@)\n*(%b@@)") do
-    --print(t)
-    t=t:sub(2,-2)
-    c=c:sub(2,-2)
-    list[t]=c
-    list[#list+1]=t
-    end
+  --print(t)
+  t=t:sub(2,-2)
+  c=c:sub(2,-2)
+  list[t]=c
+  list[#list+1]=t
+end
 
 function show(v)
-    local s=v.getText()
-    local c=list[s]
-    if c then
-        help_dlg.setTitle(s)
-        help_tv.setText(c)
-        help_dlg.show()
-        --  local adapter=ArrayAdapter(activity,android.R.layout.simple_list_item_1, String({c}))
-        -- listview.setAdapter(adapter)
-        end
-    end
+  local s=v.getText()
+  local c=list[s]
+  if c then
+    help_dlg.setTitle(s)
+    help_tv.setText(c)
+    help_dlg.show()
+    --  local adapter=ArrayAdapter(activity,android.R.layout.simple_list_item_1, String({c}))
+    -- listview.setAdapter(adapter)
+  end
+end
 
 
 
 listview=ListView(activity)
 listview.setOnItemClickListener(AdapterView.OnItemClickListener{
-    onItemClick=function(parent, v, pos,id)
-        show(v)
-        end
-    })
+  onItemClick=function(parent, v, pos,id)
+    show(v)
+  end
+})
 local adapter=ArrayAdapter(activity,android.R.layout.simple_list_item_1, String(list))
 listview.setAdapter(adapter)
 activity.setContentView(listview)
@@ -1302,27 +1334,27 @@ help_dlg.setContentView(help_sv)
 
 func={}
 func["捐赠"]=function()
-    intent = Intent();
-    intent.setAction("android.intent.action.VIEW");
-    content_url = Uri.parse("https://qr.alipay.com/apt7ujjb4jngmu3z9a");
-    intent.setData(content_url);
-    activity.startActivity(intent);
-    end
+  intent = Intent();
+  intent.setAction("android.intent.action.VIEW");
+  content_url = Uri.parse("https://qr.alipay.com/apt7ujjb4jngmu3z9a");
+  intent.setData(content_url);
+  activity.startActivity(intent);
+end
 func["返回"]=function()
-    activity.finish()
-    end
+  activity.finish()
+end
 
 items={"捐赠","返回"}
 function onCreateOptionsMenu(menu)
-    for k,v in ipairs(items) do
-        m=menu.add(v)
-        m.setShowAsActionFlags(1)
-        end
-    end
+  for k,v in ipairs(items) do
+    m=menu.add(v)
+    m.setShowAsActionFlags(1)
+  end
+end
 
 function onMenuItemSelected(id,item)
-    func[item.getTitle()]()
-    end
+  func[item.getTitle()]()
+end
 
 
 
