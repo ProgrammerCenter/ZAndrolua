@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import com.androlua.Z.*;
 
 
 public class Welcome extends Activity {

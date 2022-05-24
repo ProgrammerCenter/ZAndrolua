@@ -21,6 +21,7 @@ public interface LuaContext {
     public String getLuaPath(String dir, String name);
 
     public String getLuaDir();
+	
 
     public String getLuaDir(String dir);
 

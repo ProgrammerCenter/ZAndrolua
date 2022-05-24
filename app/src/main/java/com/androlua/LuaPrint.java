@@ -3,7 +3,6 @@ package com.androlua;
 import com.luajava.*;
 
 public class LuaPrint extends JavaFunction {
-
     private LuaState L;
     private LuaContext mLuaContext;
     private StringBuilder output = new StringBuilder();

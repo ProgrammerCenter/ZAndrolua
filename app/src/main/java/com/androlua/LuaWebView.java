@@ -1,4 +1,4 @@
-package com.androlua;
+package com.androlua; 
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -48,6 +48,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import com.androlua.Z.*;
 
 public class LuaWebView extends WebView implements LuaGcable {
 

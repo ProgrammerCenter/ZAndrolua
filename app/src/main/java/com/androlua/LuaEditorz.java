@@ -16,9 +16,10 @@ import com.myopicmobile.textwarrior.android.*;
 import com.myopicmobile.textwarrior.common.*;
 
 import java.io.*;
+import java.util.*;
 
-public class LuaEditor extends FreeScrollingTextField {
-
+public class LuaEditorz extends FreeScrollingTextField {
+   
     private Document _inputtingDoc;
 
     private boolean _isWordWrap;
@@ -34,9 +35,14 @@ public class LuaEditor extends FreeScrollingTextField {
     private LinearSearchStrategy finder;
     private int idx;
     private String mKeyword;
-
+public  static  String[] getnas()
+{
+LanguageLua lls=(LanguageLua) Lexer.getLanguage();
+	
+	return lls.getNames();
+}
     @SuppressLint("StaticFieldLeak")
-    public LuaEditor(final Context context) {
+    public LuaEditorz(final Context context) {
         super(context);
         mContext = context;
         setTypeface(Typeface.MONOSPACE);
@@ -96,7 +102,8 @@ public class LuaEditor extends FreeScrollingTextField {
             }
         }.execute();*/
     }
-
+	
+ 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         // TODO: Implement this method
@@ -113,8 +120,25 @@ public class LuaEditor extends FreeScrollingTextField {
         else
             setColorScheme(new ColorSchemeLight());
     }
+    
+    
 
-    public void addNames(String[] names) {
+    public void addNames(String[] names,boolean NoDefaultnaes) {
+		if (NoDefaultnaes==true)
+		{
+		LanguageLua lang = (LanguageLua) Lexer.getLanguage();
+		lang.no_keywordTarget();
+		lang.setNames(names);
+      
+		Lexer.setLanguage(lang);
+    
+		respan();
+      
+		invalidate();
+		
+		}
+		else{
+		
         LanguageLua lang = (LanguageLua) Lexer.getLanguage();
         String[] old = lang.getNames();
         String[] news = new String[old.length + names.length];
@@ -124,25 +148,26 @@ public class LuaEditor extends FreeScrollingTextField {
         Lexer.setLanguage(lang);
         respan();
         invalidate();
+		
+		}
 
-    }
-
-    public void addPackage(String pkg, String[] names) {
-        LanguageLua lang = (LanguageLua) Lexer.getLanguage();
-        lang.addBasePackage(pkg, names);
-        Lexer.setLanguage(lang);
-        respan();
-        invalidate();
     }
 
     public void removePackage(String pkg) {
         LanguageLua lang = (LanguageLua) Lexer.getLanguage();
+		
         lang.removeBasePackage(pkg);
         Lexer.setLanguage(lang);
         respan();
         invalidate();
     }
-
+public void addBasePackage(String pkgname, String[] pkgs){
+	
+	LanguageLua lang = (LanguageLua) Lexer.getLanguage();
+		
+    lang.addBasePackage(pkgname,pkgs);     
+	Lexer.setLanguage(lang);
+}
     public void setPanelBackgroundColor(int color) {
         // TODO: Implement this method
         _autoCompletePanel.setBackgroundColor(color);
