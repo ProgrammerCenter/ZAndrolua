@@ -747,7 +747,7 @@ int uv_cond_timedwait(uv_cond_t* cond, uv_mutex_t* mutex, uint64_t timeout) {
 #endif
   ts.tv_sec = timeout / NANOSEC;
   ts.tv_nsec = timeout % NANOSEC;
-#if defined(__ANDROID_API__) && __ANDROID_API__ < 21
+#if false //defined(__ANDROID_API__) && __ANDROID_API__ < 21
 
   /*
    * The bionic pthread implementation doesn't support CLOCK_MONOTONIC,
