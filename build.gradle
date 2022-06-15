@@ -6,7 +6,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
-		classpath 'org.eclipse.jgit-6.1.0.202203080745-r.jar'
     }
 }
 
