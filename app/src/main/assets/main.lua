@@ -12,6 +12,7 @@ import "android.net.*"
 import "android.content.*"
 import "android.graphics.drawable.*"
 import "regex"
+import "android.content.Context"
 require "lua/xalstd"
 require "xaplugControls"
 import "debugs"
@@ -22,6 +23,7 @@ import "android.content.Intent"
 import "android.net.Uri"
 import "android.webkit.MimeTypeMap"
 --import "android.graphics.drawable.*"
+openPoject=...
 require "lua/xalstd"
 activity.setTitle('AndroLua+')
 activity.setTheme(autotheme())
@@ -41,14 +43,19 @@ Plug_inloading.pelf.Customizeiput=nil
 --此功能目前暂未实现。
 debugft=activity.getSharedPreferences("xasetfil", Context.MODE_PRIVATE)
 setsets=debugft.edit()
+
 if(debugft.getString("debugft",null)==nil)
-  then
+
+
  else
   if(debugft.getString("debugft","")=="false")
     then
    else
+
+
     if(debugft.getString("debugft","")=="true")
       then
+      
       debugs.debug()
       debugisvar=true
     end
@@ -81,6 +88,10 @@ function onVersionChanged(n, o)
   做了一些小更新
   0.0.3
   添加用户自定义so功能
+  0.0.4
+  提升LuaActivity加载速度
+  ，增加activity.isXposed、activity.prevent_Xpose
+  方法
   ]]
   if o == "" then
     File("/sdcard/AndroLua/xaplug").mkdir()
@@ -963,23 +974,27 @@ func.create = function()
 end
 func.openproject = function()
   save()
-  activity.newActivity("project")
-  --[[
-      create_open_dlg2()
+  activity.newActivity("project/main.lua")
+
+  --[[ create_open_dlg2()
       list2(listview2, luaprojectdir)
       open_edit.Text=""
       open_dlg2.show()]]
+
 end
 
 func.export = function()
   save()
   if luaproject then
     local name = export(luaproject)
+
     Toast.makeText(activity, "工程已导出." .. name, Toast.LENGTH_SHORT ).show()
+    xalstd.files.ShareFiles(name)
    else
     Toast.makeText(activity, "仅支持工程导出.", Toast.LENGTH_SHORT ).show()
   end
 end
+
 func.save = function()
   save()
   Toast.makeText(activity, "文件已保存." .. luapath, Toast.LENGTH_SHORT ).show()
@@ -1277,11 +1292,14 @@ function onNewIntent(intent)
   end
 end
 
-function onResult(name, path)
+function onResult(name, path,isprojet)
   --print(name,path)
-  if name == "project" then
+
+  if name == "project/main.lua" then
     luadir = path .. "/"
     read(path .. "/main.lua")
+
+    --open("main.lua")
    elseif name == "projectinfo" then
     activity.setTitle(path)
   end
@@ -1678,15 +1696,6 @@ local function adds()
     "LuaEditorz",
     "...",
     "onLongClick",
-    "lposix",
-    "putenv",
-    "setenv",
-    "access",
-    "kernel_osname",
-    "kernel_machine",
-    "kernel_release",
-    "symlink",
-    "sysconf",
     "onItemClick",
     "onItemLongClick",
   }
@@ -1715,11 +1724,11 @@ for k,v in ipairs(curr_ms) do
 end
 editor.addPackage("activity",buf)
 editor.addPackage("lposix",{
-  "symlink",
-  "kernel_osname",
-  "putenv",
-   "access",
-  "kernel_release"})
+  "posix_symlink",
+  "posix_osname",
+  "posix_putenv",
+  "posix_access",
+  "posix_putenv"})
 
 
 function fix(c)
@@ -1780,3 +1789,5 @@ function onKeyShortcut(keyCode, event)
   end
   return false;
 end
+--[[
+运行时错误：..pprojects/zandrolua/app/SRC/main/assets/project/main.Lua：46：尝试索引零值（全局'R'）堆栈回溯：...pprojects/zandrolua/app/SRC/main/assets/project/main。Lua：46：在函数“checkIcon”中...pprojects/zandrolua/app/SRC/main/assets/project/main.Lua：53：在主块中]]

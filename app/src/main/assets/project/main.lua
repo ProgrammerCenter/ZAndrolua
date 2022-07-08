@@ -6,6 +6,7 @@ import "android.view.*"
 import "java.io.File"
 import "layout"
 import "item"
+import(activity.getPackageName()..".R")
 import "autotheme"
 
 activity.setTitle('工程')
@@ -56,7 +57,7 @@ _adp=adp
 plist.Adapter=adp
 plist.onItemClick=function(l,v,p,i)
   --activity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);	
-  activity.result({plugindir..v.Tag.path.Text})
+  activity.result({plugindir..v.Tag.path.Text,"porojet_true"})
 end
 
 function shortcut(path)

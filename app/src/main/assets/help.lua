@@ -179,6 +179,11 @@ http://android.toolib.net/reference/packages.html
 lua核心思想:
 一切皆变量
 @
+@关于防止lsposed@
+@这个东西太难防了，也太难检测了。
+所以本应用只有activity.isXposed()来检测Xposed和activity.prevent_Xpose()来防止Xposed。
+
+@
 @2，导入模块@
 @require "import"
 以导入import模块，简化写代码的难度。
@@ -1049,6 +1054,9 @@ luajava.tostring(o)
 设置布局表layout为当前activity的主视图，env是保存视图ID的表，默认是_G
 getGlobalData()
 获取全局数据
+getOpenFile()
+在通过文件打开方式启动应用时打开文件的uri，
+在不是通过文件打开方式启动应用时，返回nil;
 setSharedData(key,value)
 设置共享数据
 getSharedData(key,def)

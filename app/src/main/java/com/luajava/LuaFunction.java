@@ -1,6 +1,13 @@
 package com.luajava;
+import android.graphics.*;
 
-public class LuaFunction <T extends java.lang.Object>extends LuaObject implements LuaMetaTable {
+public class LuaFunction <T extends java.lang.Object>extends LuaObject implements LuaMetaTable
+{
+
+	public void __call(Canvas canvas)
+	{
+		// TODO: Implement this method
+	}
 
 	@Override
 	public T __call(Object[] arg) throws LuaException {

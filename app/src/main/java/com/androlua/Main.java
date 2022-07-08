@@ -5,8 +5,10 @@ import android.os.Bundle;
 import  java.io.*;
 import java.io.File;
 import android.content.*;
+import android.net.*;
 public class Main extends LuaActivity
 {
+	private Uri MopenFile=null;
 public  void traverseByListFiles(File srcFile,File desFile) throws IOException
 {
     if(srcFile.isDirectory())
@@ -59,6 +61,9 @@ public   void copyFile(File fromFile, File toFile) throws FileNotFoundException 
     }
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		if(getIntent().getData()!=null){
+			
+		MopenFile=getIntent().getData();}
 		// TODO: Implement this metho
 		/**
 
@@ -128,6 +133,7 @@ public   void copyFile(File fromFile, File toFile) throws FileNotFoundException 
 		super.onCreate(savedInstanceState);
 		if(savedInstanceState==null && getIntent().getData()!=null)
 			runFunc("onNewIntent", getIntent());
+			
 		if(getIntent().getBooleanExtra("isVersionChanged",false) && (savedInstanceState==null)){
 			onVersionChanged(getIntent().getStringExtra("newVersionName"),getIntent().getStringExtra("oldVersionName"));
 		}

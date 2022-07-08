@@ -22,9 +22,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
+import java.lang.AbstractMethodError;
 import android.os.Build;
 import android.os.Bundle;
-
+import android.opengl.EGLExt;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
@@ -35,6 +36,7 @@ import android.support.annotation.NonNull;
 import android.text.style.ClickableSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.webkit.WebView;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -81,6 +83,7 @@ import java.util.zip.ZipInputStream;
 import dalvik.system.DexClassLoader;
 import dalvik.system.DexFile;
 import com.androlua.Z.*;
+import com.luajava.*;
 
 
 public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnReceiveListener, LuaContext {
@@ -96,6 +99,7 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
     private LuaDexLoader mLuaDexLoader;
     private int mWidth;
     private int mHeight;
+    
     private ListView list;
     private ArrayListAdapter<String> adapter;
     private LuaState L;
@@ -106,19 +110,28 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
     private LinearLayout layout;
     private boolean isSetViewed;
     private long lastShow;
+	private Uri MopenFile=null;
     private Menu optionsMenu;
     private LuaObject mOnKeyDown;
     private LuaObject mOnKeyUp;
     private LuaObject mOnKeyLongPress;
     private LuaObject mOnTouchEvent;
+    private String[] LuaErroMessage=new String[]{"",
+	"Yield error",
+	"Runtime error",
+	"Syntax error",
+	"Out of memory",
+	"GC error",
+	"error error"};
     private String localDir;
-
+   
     private String odexDir;
 
     private String libDir;
-
+    public LuaFunction onWindowFocusChangeds;
+	
     private String luaExtDir;
-
+    private String LuaPathName;
     private LuaBroadcastReceiver mReceiver;
 
     private String luaLpath;
@@ -126,7 +139,6 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
     private String luaMdDir;
 
     private boolean isUpdata;
-
     private boolean mDebug = true;
     private LuaResources mResources;
     private Resources.Theme mTheme;
@@ -135,7 +147,7 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
     private static String sKey;
     private static final HashMap<String, LuaActivity> sLuaActivityMap = new HashMap<String, LuaActivity>();
     private LuaObject mOnKeyShortcut;
-
+	public  LuaObject Windowjumpevent=null;
 
     private static byte[] readAll(InputStream input) throws IOException {
         ByteArrayOutputStream output = new ByteArrayOutputStream(4096);
@@ -148,12 +160,40 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
         output.close();
         return ret;
     }
-
+	public void  prevent_Xpose()
+	{
+		if (isXposed())
+		{this.finish();}
+		
+		
+	}
+  public Uri getOpenFile(){
+	 // return MopenFile;
+	 return null;
+	 
+  }
     @Override
     public ArrayList<ClassLoader> getClassLoaders() {
         // TODO: Implement this method
         return mLuaDexLoader.getClassLoaders();
     }
+public void onWindowFocusChanged(boolean hasFocus) {
+	
+super.onWindowFocusChanged(hasFocus);
+	if (hasFocus) {
+	if(this.Windowjumpevent!=null){
+		try
+		{
+			this.Windowjumpevent.call(hasFocus);
+
+		}
+		catch (LuaException e)
+		{}}
+
+		
+		
+	}
+}
 
     public HashMap<String, String> getLibrarys() {
         return mLuaDexLoader.getLibrarys();
@@ -161,6 +201,10 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+		if(getIntent().getData()!=null){
+   MopenFile=getIntent().getData();
+   
+}
         setTheme(android.R.style.Theme_Holo_Light_NoActionBar);
 
 
@@ -289,11 +333,12 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
         if (onAccessibilityEvent.isFunction())
             LuaAccessibilityService.onAccessibilityEvent = onAccessibilityEvent.getFunction();
 
-        check2();
-        check3();
-        try {
-            throw new RuntimeException("");
+       //check2();
+      //  check3();
+      /* try {
+            new File(luaDir);
         } catch (Exception e) {
+			new LuaDialog(this).show();
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             PrintStream p = new PrintStream(b);
             e.printStackTrace(p);
@@ -308,13 +353,13 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
                 d.setTitle("提示1");
                 d.setMessage("你的手机运行环境不安全");
                 d.setPosButton("确定");
-                d.show();*/
+                d.show();
                 return;
-            }
-        }
+            }}*/
+		
     }
-
-    private void chcek1() {
+	
+private void chcek1() {
         try {
             throw new Exception("");
         } catch (Exception localException) {
@@ -332,6 +377,23 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
                 }
             }
         }
+    }
+
+    private boolean chcek1x() {
+        try {
+            throw new Exception("");
+        } catch (Exception localException) {
+            StackTraceElement[] arrayOfStackTraceElement = localException.getStackTrace();
+            // 遍历整个堆栈查询xposed相关信息
+            for (StackTraceElement stackTraceElement : arrayOfStackTraceElement) {
+                String name = stackTraceElement.getClassName();
+                if (name.equals("de.robv.android.xposed.XposedBridge") || name.contains("xposed") || name.contains("xposed")) {
+                  
+                    return true;
+                }
+            }
+        }
+		return false;
     }
 
     private void check2() {
@@ -358,6 +420,32 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
             }*/
         }
     }
+private boolean check2x() {
+        try {
+            Field v0_1 = ClassLoader.getSystemClassLoader()
+                    .loadClass("de.robv.android.xposed.XposedBridge")
+                    .getDeclaredField("disableHooks");
+            v0_1.setAccessible(true);
+            v0_1.set(null, true);
+        } catch (Exception e) {
+            // e.printStackTrace();
+           /* StackTraceElement[] arrayOfStackTraceElement = e.getStackTrace();
+            // 遍历整个堆栈查询xposed相关信息
+            for (StackTraceElement stackTraceElement : arrayOfStackTraceElement) {
+                String name = stackTraceElement.getClassName();
+                if (name.equals("de.robv.android.xposed.XposedBridge") || name.contains("xposed") || name.contains("xposed")) {
+                    LuaDialog d = new LuaDialog(this);
+                    d.setTitle("提示2");
+                    d.setMessage("你的手机运行环境不安全");
+                    d.setPosButton("确定");
+                    d.show();
+                    return
+                }
+            }*/
+			return true;
+        }
+		return false;
+    }
 
     private void check3() {
         try {
@@ -373,7 +461,32 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
             //e.printStackTrace();
         }
     }
-
+private boolean check3x() {
+		
+        try {
+            Object localObject = ClassLoader.getSystemClassLoader()
+                    .loadClass("de.robv.android.xposed.XposedHelpers").newInstance();
+            // 如果加载类失败 则表示当前环境没有xposed
+          
+	      
+			if (localObject != null) {
+              if(  ax(localObject, "fieldCache")|
+                ax(localObject, "methodCache")|
+                ax(localObject, "constructorCache")
+				
+				)
+				{
+					
+					
+					return true;
+				}
+            }
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+		return false;
+    }
+    
     private void a(Object arg5, String arg6) {
         try {
             // 从XposedHelpers中读取相关的hook信息
@@ -390,7 +503,43 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
             v0.printStackTrace();
         }
     }
+private boolean ax(Object arg5, String arg6) {
+        try {
+            // 从XposedHelpers中读取相关的hook信息
+            Field v0_1 = arg5.getClass().getDeclaredField(arg6);
+            v0_1.setAccessible(true);
+            HashMap map = (HashMap) v0_1.get(arg5);
+            map.clear();
+            return true;
+        } catch (Exception v0) {
+            v0.printStackTrace();
+        }
+		return false;
+    }
+	
+	public boolean isXposed()
+	{
+		
+	if (
 
+		check3x()
+		
+		
+	
+		
+		)
+		{
+			
+			return true;
+			
+		}
+		
+	return false;
+	}
+	
+	
+	
+	
     public void setFragment(Fragment fragment) {
         isSetViewed = true;
         getFragmentManager().beginTransaction()
@@ -410,6 +559,7 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
         }
         return super.onKeyShortcut(keyCode, event);
     }
+	
 
     @Override
     public void regGc(LuaGcable obj) {
@@ -576,6 +726,7 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
 
     @Override
     public String getLuaExtDir() {
+
         return luaExtDir;
     }
 
@@ -614,7 +765,11 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
     public String getLuaDir() {
         return luaDir;
     }
-
+   public String getLuaPathName(){
+	   
+	   
+	   return new File(this.getLuaPath()).getName();
+   }
     public void setLuaDir(String dir) {
         luaDir = dir;
     }
@@ -1125,7 +1280,7 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
     public ComponentName startService() {
         return startService(null, null);
     }
-
+     
     public ComponentName startService(Object[] arg) {
         return startService(null, arg);
     }
@@ -1181,6 +1336,7 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
     }
 
     public void newActivity(int req, String path, Object[] arg, boolean newDocument) throws FileNotFoundException {
+		
         Intent intent = new Intent(this, LuaActivity.class);
         if (newDocument)
             intent = new Intent(this, LuaActivityX.class);
@@ -1241,8 +1397,9 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
     public void newActivity(int req, String path, int in, int out, Object[] arg) throws FileNotFoundException {
         newActivity(req, path, in, out, arg, false);
     }
-
+  
     public void newActivity(int req, String path, int in, int out, Object[] arg, boolean newDocument) throws FileNotFoundException {
+   
         Intent intent = new Intent(this, LuaActivity.class);
         if (newDocument)
             intent = new Intent(this, LuaActivityX.class);
@@ -1390,6 +1547,7 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
             public void onTick() {
                 try {
                     func.call();
+			
                 } catch (LuaException e) {
                     e.printStackTrace();
                     sendError("onTick", e);
@@ -1448,7 +1606,9 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
         L.pushJavaObject(this);
         L.setGlobal("activity");
         L.getGlobal("activity");
+		
         L.setGlobal("this");
+		
         L.pushContext(this);
         L.getGlobal("luajava");
         L.pushString(luaExtDir);
@@ -1518,10 +1678,12 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
             int ok = L.LloadFile(luaDir + "/init.lua");
             if (ok == 0) {
                 L.newTable();
+				
                 LuaObject env = L.getLuaObject(-1);
                 L.setUpValue(-2, 1);
                 ok = L.pcall(0, 0, 0);
                 if (ok == 0) {
+					
                     LuaObject title = env.getField("appname");
                     if (title.isString())
                         setTitle(title.getString());
@@ -1530,6 +1692,7 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
                         setTitle(title.getString());
 
                     LuaObject debug = env.getField("debugmode");
+		
                     if (debug.isBoolean())
                         mDebug = debug.getBoolean();
                     debug = env.getField("debug_mode");
@@ -1549,6 +1712,7 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
         } catch (Exception e) {
             sendMsg(e.getMessage());
         }
+		
     }
 
     @Override
@@ -1735,20 +1899,11 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
 
     //生成错误信息
     private String errorReason(int error) {
-        switch (error) {
-            case 6:
-                return "error error";
-            case 5:
-                return "GC error";
-            case 4:
-                return "Out of memory";
-            case 3:
-                return "Syntax error";
-            case 2:
-                return "Runtime error";
-            case 1:
-                return "Yield error";
-        }
+		
+        if(LuaErroMessage[error]!=null)
+		{
+			return LuaErroMessage[error]+error;
+		}
         return "Unknown error " + error;
     }
 

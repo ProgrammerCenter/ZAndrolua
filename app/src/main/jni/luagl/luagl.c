@@ -14,7 +14,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -132,6 +131,7 @@ static int luagl_color_mask(lua_State *L)
               (GLboolean)luagl_checkboolean(L, 3), (GLboolean)luagl_checkboolean(L, 4));
   return 0;
 }
+
 
 /*ColorPointer (colorArray) -> none*/
 static int luagl_color_pointer(lua_State *L)

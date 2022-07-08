@@ -77,6 +77,7 @@ public class LuaApplication extends Application implements LuaContext {
 
 
     public static LuaApplication getInstance() {
+		
         return mApp;
     }
 

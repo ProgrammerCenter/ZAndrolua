@@ -31,6 +31,7 @@ public final class Merger {
      * @return {@code non-null;} the result of merging the two types
      */
     public static TypeBearer mergeType(TypeBearer ft1, TypeBearer ft2) {
+		
         if ((ft1 == null) || ft1.equals(ft2)) {
             return ft1;
         } else if (ft2 == null) {

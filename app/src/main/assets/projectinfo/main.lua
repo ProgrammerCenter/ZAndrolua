@@ -6,7 +6,7 @@ import "android.view.*"
 require "permission"
 import "layout"
 import "autotheme"
-
+pakgenames=activity.getPackageName()
 activity.setTitle('工程属性')
 activity.setTheme(autotheme())
 activity.setContentView(loadlayout(layout))
@@ -18,7 +18,7 @@ dlg.view=plist
 dlg.setButton("确定",nil)
 btn.onClick=function()
   dlg.show()
-  end
+end
 projectdir=...
 luaproject=projectdir.."/init.lua"
 app={}

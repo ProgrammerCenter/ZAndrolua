@@ -339,7 +339,7 @@ public abstract class AsyncTaskX<Params, Progress, Result> {
                     Binder.flushPendingCommands();
                 } catch (Throwable tr) {
                     mCancelled.set(true);
-                    throw tr;
+                  throw new RuntimeException(tr);
                 } finally {
                     postResult(result);
                 }

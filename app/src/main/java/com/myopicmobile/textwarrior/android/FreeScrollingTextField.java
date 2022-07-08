@@ -172,7 +172,8 @@ public class FreeScrollingTextField extends View
         PICKER_SETS.put('N', "\u00D1\u0143\u0147");
         PICKER_SETS.put('O', "\u00D8\u0152\u00D5\u00D2\u00D3\u00D4\u00D6\u014C");
         PICKER_SETS.put('R', "\u0158");
-        PICKER_SETS.put('S', "\u015A\u0160\u015E");
+       
+		PICKER_SETS.put('S', "\u015A\u0160\u015E");
         PICKER_SETS.put('T', "\u0164");
         PICKER_SETS.put('U', "\u00D9\u00DA\u00DB\u00DC\u016E\u016A");
         PICKER_SETS.put('Y', "\u00DD\u0178");

@@ -39,7 +39,7 @@ function checkicon(i)
     f:close()
     return i
   else
-    return R.drawable.icon
+    return android.R.drawable.icon
   end
 end
 

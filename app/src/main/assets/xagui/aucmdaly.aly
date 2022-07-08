@@ -1,0 +1,23 @@
+{
+  LinearLayout;
+  orientation="vertical";
+  layout_width="fill";
+  {
+    EditText;
+    backgroundColor="#000000";
+    layout_height="600sp";
+    textColor="#ffffff";
+    Focusable=false;
+    layout_width="match";
+    id="cmdlogtxt";
+    gravity="start";
+  };
+  {
+    EditText;
+    gravity="start";
+    layout_height="150sp";
+    layout_width="match";
+    background="@null";
+    id="xashcmdbtn";
+  };
+};

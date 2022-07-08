@@ -6,6 +6,7 @@ import android.view.*;
 import com.androlua.*;
 import com.androlua.util.*;
 import android.graphics.drawable.*;
+import com.androlua.Z.*;
 
 public class FloatButton extends ImageView {
 
