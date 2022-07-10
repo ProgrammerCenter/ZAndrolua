@@ -1731,6 +1731,7 @@ for k,v in ipairs(curr_ms) do
     table.insert(buf,v)
   end
 end
+editor.addNames({"activity","javaClassTools","ZipIoTools","lposix"})
 editor.addPackage("activity",buf)
 editor.addPackage("lposix",
 {"posix_symlink",
