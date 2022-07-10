@@ -1,5 +1,5 @@
 
-
+#include  "posix_import.h"
 static int lputchar(lua_State* L)
 {
 const char * putstr=luaL_checkstring(L,1);
@@ -25,3 +25,6 @@ abort();
 		  lua_pushstring(L,vseronx);
 		  return 1;
 }
+
+ 
+
