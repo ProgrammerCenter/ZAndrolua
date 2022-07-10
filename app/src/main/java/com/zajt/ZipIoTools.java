@@ -6,19 +6,19 @@ import java.util.zip.ZipOutputStream;
 import java.io.*;
 class ZipIoTools
 {
-	private String zipbpath="";
+	private String ZipName="";
 
 	public ZipIoTools(String paths)
 	{
 
-		this.zipbpath = paths;
+		this.ZipName = paths;
 
 
 
 	}
 	public String extractZipComments()
 	{
-		return	ZipIoTools.extractZipComment(this.zipbpath);
+		return	ZipIoTools.extractZipComment(this.ZipName);
 
 	}
 	public   static    String extractZipComment(String filename)
@@ -102,7 +102,7 @@ class ZipIoTools
 	}
 	public void addfiles(String filename) throws java.io.IOException
 	{
-		ZipIoTools.addfile(this.zipbpath, filename);
+		ZipIoTools.addfile(this.ZipName, filename);
 
 	}
 
