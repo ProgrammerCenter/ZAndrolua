@@ -4,11 +4,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import java.io.*;
-class ziot
+class ZipIoTools
 {
 	private String zipbpath="";
     
-public ziot(String paths){
+public ZipIoTools(String paths){
 	
 	this.zipbpath=paths;
 	

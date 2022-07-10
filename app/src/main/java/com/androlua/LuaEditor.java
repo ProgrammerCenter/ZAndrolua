@@ -11,11 +11,12 @@ import android.view.*;
 import android.widget.*;
 import android.widget.RadioGroup.*;
 import android.widget.TextView.*;
-
+import java.lang.String;
 import com.myopicmobile.textwarrior.android.*;
 import com.myopicmobile.textwarrior.common.*;
 
 import java.io.*;
+import com.luajava.*;
 
 public class LuaEditor extends FreeScrollingTextField {
 
@@ -133,8 +134,9 @@ public class LuaEditor extends FreeScrollingTextField {
         Lexer.setLanguage(lang);
         respan();
         invalidate();
+		
     }
-
+ 
     public void removePackage(String pkg) {
         LanguageLua lang = (LanguageLua) Lexer.getLanguage();
         lang.removeBasePackage(pkg);

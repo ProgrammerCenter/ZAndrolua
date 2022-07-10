@@ -200,7 +200,7 @@ local function binapk(luapath, apkpath)
     if dir=="so/"
       return
     end
-    if dir~="build_script/" and no_pack_dir_b[dir]~=true
+    if dir~="build_script/" and no_pack_dir_b[dir]~=true and dir~="buildtmp/"
       local entry = ZipEntry("assets/" .. dir)
       out.putNextEntry(entry)
       local ls = f.listFiles()

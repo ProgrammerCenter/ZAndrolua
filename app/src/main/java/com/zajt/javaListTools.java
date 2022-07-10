@@ -1,7 +1,7 @@
 package com.zajt;
 import java.util.*;
 
-public class jlistTx extends mjt
+public class javaListTools extends MainjavaTools
 {
 	
  static   public <T> List<List<T>> cartesianProduct(T[]... sets) {

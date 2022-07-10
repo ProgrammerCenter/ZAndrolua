@@ -13,7 +13,6 @@
 #define luaL_register(L,n,f) \
                { if ((n) == NULL) luaL_setfuncs(L,f,0); else luaL_newlib(L,f); }
 #endif
-
 typedef uLong (*checksum_t)        (uLong crc, const Bytef *buf, uInt len);
 typedef uLong (*checksum_combine_t)(uLong crc1, uLong crc2, z_off_t len2);
 

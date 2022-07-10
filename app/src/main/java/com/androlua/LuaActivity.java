@@ -114,6 +114,7 @@ public class LuaActivity extends Activity implements LuaBroadcastReceiver.OnRece
     private Menu optionsMenu;
     private LuaObject mOnKeyDown;
     private LuaObject mOnKeyUp;
+	
     private LuaObject mOnKeyLongPress;
     private LuaObject mOnTouchEvent;
     private String[] LuaErroMessage=new String[]{"",
@@ -1606,7 +1607,6 @@ private boolean ax(Object arg5, String arg6) {
         L.pushJavaObject(this);
         L.setGlobal("activity");
         L.getGlobal("activity");
-		
         L.setGlobal("this");
 		
         L.pushContext(this);

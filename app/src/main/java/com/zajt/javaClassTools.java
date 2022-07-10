@@ -1,9 +1,9 @@
 package com.zajt;
 import java.util.*;
 import java.lang.reflect.*;
-import com.zajt.mjt;
+import com.zajt.MainjavaTools;
 import javax.microedition.khronos.*;
-public class  jclassT extends mjt
+public class  javaClassTools extends MainjavaTools
 {
 
 	public static List<String>   getClassAttribute(Class cls) {
@@ -22,12 +22,18 @@ public class  jclassT extends mjt
                 //获取属性
                 String name = field.getName();
                 //获取属性值
+				
                
         arrayx.add( field.getName() );
             
       }
 	  
 	  return arrayx;
+	}
+	public enum h
+	{
+	
+		
 	}
 public  static boolean isClass(Class cls,Object obj)
 {
@@ -46,7 +52,7 @@ else{
 }
 
 }
-public static List<String>   getClassAttribute_obj(Object obj) {
+public static List<String>   getObjectClassAttribute(Object obj) {
 		List<String> arrayx = new ArrayList<String>();
 
         String nameVlues = "";
@@ -68,13 +74,13 @@ public static List<String>   getClassAttribute_obj(Object obj) {
       }
 	  return arrayx;
 	}
-	public static List<String> getcmethnmae_obj(Object objsnmae)
+	public static List<String> getObjectClassMethod(Object objsnmae)
 	{
 	Class clsss=objsnmae.getClass();
-		return getclsMethodname(clsss,false);
+		return getClassMethodName(clsss,false);
 	}
 	
-public static List<String> getclsMethodname(Class clsname,boolean isppublicno) {
+public static List<String> getClassMethodName(Class clsname,boolean isppublicno) {
 	
 		List<String> clsMethodname = new ArrayList<String>();
         Class<String> stringClass = clsname;
@@ -93,12 +99,13 @@ public static List<String> getclsMethodname(Class clsname,boolean isppublicno) {
         }
 		return clsMethodname;
 		}
-		public static List<String> clas2table(Class clsname,boolean isppublicno) {
+		public static String[] getMethodArray(Class clsname,boolean isppublicno) {
 	
-		List<String> clsMethodname = new ArrayList<String>();
+		
         Class<String> stringClass = clsname;
         // 获取所有的 public 修饰的方法，包括父类的。
         Method[] methods = stringClass.getMethods();
+		String[] clsMethodname = new String[methods.length];
         // 获取声明是所有本类的方法（不包括父类的）
        Method[] declaredMethods = stringClass.getDeclaredMethods();
         for (int i = 0; i < methods.length; i++) {
@@ -107,18 +114,11 @@ public static List<String> getclsMethodname(Class clsname,boolean isppublicno) {
             Method method = methods[i];
             
          
-           clsMethodname.add(method.getName());
+           clsMethodname[i]=method.getName();
             
         }
 		return clsMethodname;
 		}
-	static void	 test(mjt t)
-	{
-		
-		
-		
-
-		
-	}
 	
+		
 	}

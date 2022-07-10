@@ -55,7 +55,7 @@ if(debugft.getString("debugft",null)==nil)
 
     if(debugft.getString("debugft","")=="true")
       then
-      
+
       debugs.debug()
       debugisvar=true
     end
@@ -388,6 +388,9 @@ m = {
     id = "plugin", },
   { SubMenu,
     title = "更多...",
+    {MenuItem,
+      title = "本软件github仓库",
+      id = "more_gits"},
     { MenuItem,
       title = "unciv模组开发文档",
       id = "more_ucmdoc", },
@@ -413,7 +416,7 @@ m = {
       title = "支持作者",
       id = "more_donation", },
     { MenuItem,
-      title = "联系作者",
+      title = "联系Androlua作者",
       id = "more_qq", },
     { MenuItem,
       title = "关于",
@@ -1143,6 +1146,11 @@ end
 func.java = function()
   activity.newActivity("javaapi/main")
 end
+func.gitWebsite=function()
+  local url="https://github.com/MGLSIDE/ZAndrolua"
+  viewIntent = Intent("android.intent.action.VIEW",Uri.parse(url))
+  activity.startActivity(viewIntent)
+end
 func.openjavaenweb=function ()
   local url="https://www.java.com/en/"
   viewIntent = Intent("android.intent.action.VIEW",Uri.parse(url))
@@ -1247,6 +1255,7 @@ function onMenuItemSelected(id, item)
     [optmenu.plugin] = func.plugin,
     [optmenu.more_LFMI]=func.LFMI,
     [optmenu.more_AndAPIdoc]=func.AndAPIdoc,
+    [optmenu.more_gits]=func.gitWebsite,
     [optmenu.more_apke]=func.apke,
     [optmenu.more_setting]=func.settingEditor,
     [optmenu.more_TLFMI]=func.TLFMI,
@@ -1723,13 +1732,17 @@ for k,v in ipairs(curr_ms) do
   end
 end
 editor.addPackage("activity",buf)
-editor.addPackage("lposix",{
-  "posix_symlink",
+editor.addPackage("lposix",
+{"posix_symlink",
   "posix_osname",
   "posix_putenv",
   "posix_access",
   "posix_putenv"})
-
+editor.addPackage("zajt",
+{"javaClassTools"
+  ,"javaListTools"
+  ,"MainjavaTools"
+  ,"ZipIoTools"})
 
 function fix(c)
   local classes = require "javaapi.android"
