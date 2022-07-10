@@ -35,7 +35,7 @@ public class  javaClassTools extends MainjavaTools
 	
 		
 	}
-public  static boolean isClass(Class cls,Object obj)
+public  static boolean isObjectClass(Class cls,Object obj)
 {
 	if (obj.getClass().getName()=="java.lang.Class")
 	{

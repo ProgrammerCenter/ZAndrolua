@@ -1738,11 +1738,16 @@ editor.addPackage("lposix",
   "posix_putenv",
   "posix_access",
   "posix_putenv"})
-editor.addPackage("zajt",
-{"javaClassTools"
-  ,"javaListTools"
-  ,"MainjavaTools"
-  ,"ZipIoTools"})
+editor.addPackage("javaClassTools",
+{"getClassAttribute",
+  "isObjectClass",
+  "getClassMethodName",
+  "getMethodArray",
+  "getObjectClassAttribute"})
+editor.addPackage("ZipIoTools",{
+  "addfile",
+  "extractZipComment"
+  })
 
 function fix(c)
   local classes = require "javaapi.android"
