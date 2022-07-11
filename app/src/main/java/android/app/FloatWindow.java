@@ -8,7 +8,8 @@ import android.view.*;
 import android.widget.*;
 import android.util.*;
 
-public class FloatWindow {
+public class FloatWindow
+{
 
 	private Context mContext;
 
@@ -30,7 +31,8 @@ public class FloatWindow {
 
 	private int mHeight;
 
-	public FloatWindow(Context context) {
+	public FloatWindow(Context context)
+	{
 		mContext = context;
 		dm = context.getResources().getDisplayMetrics();
 		mWidth = getWidth();
@@ -38,7 +40,8 @@ public class FloatWindow {
 		init(context);
 	}
 
-	private void init(Context context) {
+	private void init(Context context)
+	{
 		// TODO: Implement this method
 		mWindowManager = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
 		mLayoutParams = new WindowManager.LayoutParams();
@@ -75,82 +78,101 @@ public class FloatWindow {
 	}
 
 
-	private int getWidth() {
+	private int getWidth()
+	{
 		return mContext.getResources().getDisplayMetrics().widthPixels;
 	}
 
-	private int getHeight() {
+	private int getHeight()
+	{
 		return mContext.getResources().getDisplayMetrics().heightPixels;
 	}
 
-	private void setFocus(boolean f) {
-		if (f) {
-			if (mLayoutParams.flags == (WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)) {
+	private void setFocus(boolean f)
+	{
+		if (f)
+		{
+			if (mLayoutParams.flags == (WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE))
+			{
 				mWindowManager.removeView(mLayout);
 				mWindowManager.addView(mLayout, mLayoutParams);
 				mLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH;
 				mWindowManager.updateViewLayout(mLayout, mLayoutParams);
 			}
 		}
-		else {
+		else
+		{
 			mLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
 			mWindowManager.updateViewLayout(mLayout, mLayoutParams);
 		}
 	}
 
-	private int dp(float n) {
+	private int dp(float n)
+	{
 		// TODO: Implement this method
 		return (int)TypedValue.applyDimension(1, n, dm);
 	}
 
-	public void setBackground(Drawable bg) {
+	public void setBackground(Drawable bg)
+	{
 		mLayout.setBackgroundDrawable(bg);
 	}
 
-	public Drawable getBackground() {
+	public Drawable getBackground()
+	{
 		return mLayout.getBackground();
 	}
 
-	public void setTitle(CharSequence title) {
+	public void setTitle(CharSequence title)
+	{
 		mTitlebar.setTitle(title);
 	}
 
-	public void setContentView(View v) {
+	public void setContentView(View v)
+	{
 		content.removeAllViews();
 		content.addView(v);
 	}
 
-	public void show() {
+	public void show()
+	{
 		mLayout.setVisibility(View.VISIBLE);
 	}
 
-	public void hide() {
+	public void hide()
+	{
 		mLayout.setVisibility(View.GONE);
 	}
 
-	public void dismiss() {
+	public void dismiss()
+	{
 		mWindowManager.removeView(mLayout);
 	}
 
-	public void setFlags(int flags) {
+	public void setFlags(int flags)
+	{
 		mLayoutParams.flags = flags;
 		mWindowManager.updateViewLayout(mLayout, mLayoutParams);
 	}
 
-	public void setFormat(int format) {
+	public void setFormat(int format)
+	{
 		mLayoutParams.format = format;
 		mWindowManager.updateViewLayout(mLayout, mLayoutParams);
 	}
 
-	public void setType(int type) {
+	public void setType(int type)
+	{
 		mLayoutParams.type = type;
 		mWindowManager.updateViewLayout(mLayout, mLayoutParams);
 	}
 
-	private class TitleBar extends LinearLayout {
+	private class TitleBar extends LinearLayout
+	{
 
 		private TextView mTitle;
-		public TitleBar(Context context) {
+		public TitleBar(Context context)
+		{
 			super(context);
 			mTitle = new TitleView(context);
 			mTitle.setSingleLine(true);
@@ -167,7 +189,8 @@ public class FloatWindow {
 			mClose.setOnClickListener(new OnClickListener(){
 
 					@Override
-					public void onClick(View p1) {
+					public void onClick(View p1)
+					{
 						// TODO: Implement this method
 						dismiss();
 					}
@@ -175,12 +198,14 @@ public class FloatWindow {
 			addView(mTitle, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, dp(24), 1));
 			addView(mClose, new LinearLayout.LayoutParams(dp(24), dp(24)));
 		}
-		public void setTitle(CharSequence title) {
+		public void setTitle(CharSequence title)
+		{
 			mTitle.setText(title);
 		}
 	}
 
-	private class TitleView extends TextView {
+	private class TitleView extends TextView
+	{
 
 		private int lastX=0;
 		private int lastY=0;
@@ -190,25 +215,29 @@ public class FloatWindow {
 		private int ry;
 		private int rx;
 
-		public TitleView(Context context) {
+		public TitleView(Context context)
+		{
 			super(context);
 		}
 
 		@Override
-		public boolean onTouchEvent(MotionEvent e) {
+		public boolean onTouchEvent(MotionEvent e)
+		{
 			// TODO: Implement this method
 			Rect frame=new Rect();
 			getWindowVisibleDisplayFrame(frame);
 			h = frame.top;
 			ry = (int) e.getRawY();//获取触摸绝对Y位置
 			rx = (int) e.getRawX();//获取触摸绝对X位置
-			if (e.getAction() == MotionEvent.ACTION_DOWN) {	
+			if (e.getAction() == MotionEvent.ACTION_DOWN)
+			{	
 				vy = ry - (int) e.getY();//获取视图的Y位置
 				vx = rx - (int) e.getX();//获取视图的X位置
 				lastY = ry;//记录按下的Y位置
 				lastX = rx;//记录按下的X位置
 			}
-			else if (e.getAction() == MotionEvent.ACTION_MOVE) {
+			else if (e.getAction() == MotionEvent.ACTION_MOVE)
+			{
 				mLayoutParams.gravity = Gravity.LEFT | Gravity.TOP ;//调整悬浮窗口至左上角
 				mLayoutParams.x = vx + (rx - lastX);//移动的相对位置
 				mLayoutParams.y = vy + (ry - lastY) - h + 3;//移动的相对位置
@@ -221,7 +250,8 @@ public class FloatWindow {
 
 	}
 
-	private class ContentView extends LinearLayout {
+	private class ContentView extends LinearLayout
+	{
 
 		private int lastX=0;
 		private int lastY=0;
@@ -242,18 +272,22 @@ public class FloatWindow {
 
 		private boolean zoomY;
 
-		public ContentView(Context context) {
+		public ContentView(Context context)
+		{
 			super(context);
 			m = dp(8);
 		}
 
 		@Override
-		public boolean onInterceptTouchEvent(MotionEvent e) {
+		public boolean onInterceptTouchEvent(MotionEvent e)
+		{
 			// TODO: Implement this method
-			if (e.getAction() == MotionEvent.ACTION_OUTSIDE) {
+			if (e.getAction() == MotionEvent.ACTION_OUTSIDE)
+			{
 				setFocus(false);
 			}
-			else if (e.getAction() == MotionEvent.ACTION_DOWN) {	
+			else if (e.getAction() == MotionEvent.ACTION_DOWN)
+			{	
 				setFocus(true);
 			}
 
@@ -263,21 +297,27 @@ public class FloatWindow {
 
 
 		@Override
-		public boolean onTouchEvent(MotionEvent e) {
+		public boolean onTouchEvent(MotionEvent e)
+		{
 			// TODO: Implement this method
 			ry = (int) e.getRawY();//获取触摸绝对Y位置
 			rx = (int) e.getRawX();//获取触摸绝对X位置
-			if (e.getAction() == MotionEvent.ACTION_OUTSIDE) {
+			if (e.getAction() == MotionEvent.ACTION_OUTSIDE)
+			{
 				setFocus(false);
 			}
-			else if (e.getAction() == MotionEvent.ACTION_DOWN) {	
+			else if (e.getAction() == MotionEvent.ACTION_DOWN)
+			{	
 				setFocus(true);
 			}
-			if (e.getAction() == MotionEvent.ACTION_DOWN) {	
-				if (getWidth() - e.getX() < m) {
+			if (e.getAction() == MotionEvent.ACTION_DOWN)
+			{	
+				if (getWidth() - e.getX() < m)
+				{
 					zoomX = true;
 				}
-				if (getHeight() - e.getY() < m) {
+				if (getHeight() - e.getY() < m)
+				{
 					zoomY = true;
 				}
 				vw = getWidth();//获取视图的Y位置
@@ -287,7 +327,8 @@ public class FloatWindow {
 				vx = mLayoutParams.x;
 				vy = mLayoutParams.y;
 			}
-			else if (e.getAction() == MotionEvent.ACTION_MOVE) {
+			else if (e.getAction() == MotionEvent.ACTION_MOVE)
+			{
 				mLayoutParams.x = vx;
 				mLayoutParams.y = vy;
 				if (zoomX)
@@ -296,9 +337,10 @@ public class FloatWindow {
 					mLayoutParams.height = Math.min(vh + (ry - lastY), mHeight);//移动的相对高度
 				mWindowManager.updateViewLayout(mLayout, mLayoutParams);//调整悬浮窗至指定的大小
 			}
-			else if (e.getAction() == MotionEvent.ACTION_UP) {
-				zoomX=false;
-				zoomY=false;
+			else if (e.getAction() == MotionEvent.ACTION_UP)
+			{
+				zoomX = false;
+				zoomY = false;
 			}
 			return true;
 		}

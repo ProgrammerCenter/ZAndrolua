@@ -37,9 +37,9 @@ public class CompileUtils
         outputChannel.transferFrom(inputChannel, 0, inputChannel.size());
         inputChannel.close();
         outputChannel.close();
-		
+
 	}
-    
+
     public static List<String> getFiles(String path)
     {
         return getFiles("", path);
@@ -75,7 +75,7 @@ public class CompileUtils
         }
         return list;
     }
-    
+
     public static List<String> getFilesAllName(String path)
     {
         File file = new File(path);
@@ -125,7 +125,7 @@ public class CompileUtils
         bw.write(str);
         bw.close();
 	}
-    
+
     public static String getOnCreate(String content)
     {
         String startStr = "void onCreate()";
@@ -155,7 +155,7 @@ public class CompileUtils
         return (end != -1) ? content.substring(start, end) : "";
         //return content.substring(content.indexOf(startStr) + startStr.length(), content.lastIndexOf(endStr));
 	}
-    
+
     public static String getImport(String content)
     {
         StringBuilder str = new StringBuilder();
@@ -192,9 +192,9 @@ public class CompileUtils
         }
         return str.toString();
     }
-    
+
     //使用aapt编译资源
-    public static boolean aapt(String res,String gen,String assets,String androidmanifest,String android_jar,String ap_)
+    public static boolean aapt(String res, String gen, String assets, String androidmanifest, String android_jar, String ap_)
     {
         String[] args = 
         {
@@ -226,7 +226,7 @@ public class CompileUtils
              InputStream input=process.getErrorStream(); 
              //获得错误信息
              */
-            if (code!=0)
+            if (code != 0)
                 return false;
         }
         catch (IOException e)
@@ -243,16 +243,16 @@ public class CompileUtils
     }
 
     //使用ecj编译java
-    public static boolean ecj(String libs,String android_jar,String java,String r_java,String classs,String mainactivity)
+    public static boolean ecj(String libs, String android_jar, String java, String r_java, String classs, String mainactivity)
     {
-		ErrorMessage="";
-		CompilationLog="";
-		iferror=false;
+		ErrorMessage = "";
+		CompilationLog = "";
+		iferror = false;
         //编译信息
         ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
         //错误信息
         ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
-        Main main = new Main(new PrintWriter(baos1),new PrintWriter(baos2),false,null,null);
+        Main main = new Main(new PrintWriter(baos1), new PrintWriter(baos2), false, null, null);
         //像下面这样可以直接打印信息
         //Main main=new Main(new PrintWriter(System.out),new PrintWriter(System.err),false,null,null);
         String[] args =
@@ -263,9 +263,9 @@ public class CompileUtils
             //android.jar文件路径
             "-bootclasspath",android_jar,
             //java文件存放路径
-            "-classpath",java+":"+
+            "-classpath",java + ":" +
             //r.java文件存放路径
-            r_java+":"+
+            r_java + ":" +
             //第三方jar文件存放路径，如果没有使用第三方jar那就不用添加，它们之间用冒号隔开
             libs,
             "-1.6",
@@ -283,47 +283,52 @@ public class CompileUtils
         String s1 = baos1.toString();
         //获得错误信息字符串
         String s2 = baos2.toString();
-        Log.e("ecj",s2);
-		if (b){
-			
-			}else{
-		ErrorMessage=s2;
-		iferror=true;
+        Log.e("ecj", s2);
+		if (b)
+		{
+
 		}
-		CompilationLog=s1;
+		else
+		{
+			ErrorMessage = s2;
+			iferror = true;
+		}
+		CompilationLog = s1;
         return b;
     }
 
     //使用dx生成dex文件
-    public static boolean dex(String dex,String classs,String libs)
+    public static boolean dex(String dex, String classs, String libs)
     {
         String[] args =
         {
             "--verbose",
             //核心数
-            "--num-threads="+Runtime.getRuntime().availableProcessors(),
+            "--num-threads=" + Runtime.getRuntime().availableProcessors(),
             //classes.dex文件输出路径
-            "--output="+dex,
+            "--output=" + dex,
             //class文件存放路径
             classs,
             //如果使用了第三方jar请添加存放路径
             libs
         };
         com.android.dx.command.dexer.Main.Arguments arguments = new com.android.dx.command.dexer.Main.Arguments();
-		
+
         arguments.parse(args);
-		
+
         try
         {
             int code = com.android.dx.command.dexer.Main.run(arguments);
-    
-		
-			try{if (code!=0)
-                return false;
-            return true;}
-			catch(Exception e2){
+
+
+			try
+			{if (code != 0)
+					return false;
+				return true;}
+			catch (Exception e2)
+			{
 				e2.printStackTrace();
-				
+
 				return false;
 			}
         }
@@ -335,78 +340,78 @@ public class CompileUtils
     }
 
     //使用sdklib打包生成未签名的apk
-  /*  public static boolean sdklib(String ap_,String resources,String dex)
-    {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try
-        {
-            ApkBuilder builder = new ApkBuilder(
-                //未签名的apk输出路径
-                new File(ap_),
-                //aapt生成的文件路径
-                new File(resources),
-                //dx生成的文件
-                new File(dex),
-                null,
-                new PrintStream(baos)
-            );
-            builder.sealApk();
-            //如果失败请打印此信息
-            String s = baos.toString();
-        }
-        catch (ApkCreationException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-        catch (SealedApkException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }*/
+	/*  public static boolean sdklib(String ap_,String resources,String dex)
+	 {
+	 ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	 try
+	 {
+	 ApkBuilder builder = new ApkBuilder(
+	 //未签名的apk输出路径
+	 new File(ap_),
+	 //aapt生成的文件路径
+	 new File(resources),
+	 //dx生成的文件
+	 new File(dex),
+	 null,
+	 new PrintStream(baos)
+	 );
+	 builder.sealApk();
+	 //如果失败请打印此信息
+	 String s = baos.toString();
+	 }
+	 catch (ApkCreationException e)
+	 {
+	 e.printStackTrace();
+	 return false;
+	 }
+	 catch (SealedApkException e)
+	 {
+	 e.printStackTrace();
+	 return false;
+	 }
+	 return true;
+	 }*/
 
     //使用zipsigner签名apk
-  /*  public static boolean zipSigner(String key,String ap_,String apk)
-    {
-        try
-        {
-            ZipSigner zipSigner = new ZipSigner();
-            zipSigner.setKeymode(key);
-            zipSigner.signZip(
-                //未签名的apk文件
-                ap_,
-                //签名输出apk文件
-                apk
-            );
-        }
-        catch (ClassNotFoundException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-        catch (IllegalAccessException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-        catch (InstantiationException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-        catch (GeneralSecurityException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }*/
-    
+	/*  public static boolean zipSigner(String key,String ap_,String apk)
+	 {
+	 try
+	 {
+	 ZipSigner zipSigner = new ZipSigner();
+	 zipSigner.setKeymode(key);
+	 zipSigner.signZip(
+	 //未签名的apk文件
+	 ap_,
+	 //签名输出apk文件
+	 apk
+	 );
+	 }
+	 catch (ClassNotFoundException e)
+	 {
+	 e.printStackTrace();
+	 return false;
+	 }
+	 catch (IllegalAccessException e)
+	 {
+	 e.printStackTrace();
+	 return false;
+	 }
+	 catch (InstantiationException e)
+	 {
+	 e.printStackTrace();
+	 return false;
+	 }
+	 catch (GeneralSecurityException e)
+	 {
+	 e.printStackTrace();
+	 return false;
+	 }
+	 catch (IOException e)
+	 {
+	 e.printStackTrace();
+	 return false;
+	 }
+	 return true;
+	 }*/
+
 }
