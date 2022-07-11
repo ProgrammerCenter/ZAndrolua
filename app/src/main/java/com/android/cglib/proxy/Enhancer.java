@@ -44,7 +44,7 @@ public class Enhancer {
 		TypeId<?> interfaceTypeId = TypeId.get(EnhancerInterface.class);
 
 		String cacheDir = context.getExternalFilesDir("dexfiles").getAbsolutePath();
-System.out.println("[Enhancer::create()] Create class extends from \"" + superclass.getName() + "\" stored in " + cacheDir);
+//System.out.println("[Enhancer::create()] Create class extends from \"" + superclass.getName() + "\" stored in " + cacheDir);
 
 		DexMaker dexMaker = new DexMaker();
 		dexMaker.declare(subType, superClsName + ".proxy", Modifier.PUBLIC, superType, interfaceTypeId);

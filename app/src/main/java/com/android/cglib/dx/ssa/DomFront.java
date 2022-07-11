@@ -79,8 +79,8 @@ public class DomFront {
         if (DEBUG) {
             for (int i = 0; i < szNodes; i++) {
                 SsaBasicBlock node = nodes.get(i);
-                //System.out.println("pred[" + i + "]: "
-                      //  + node.getPredecessors());
+                System.out.println("pred[" + i + "]: "
+                       + node.getPredecessors());
             }
         }
 
@@ -90,7 +90,7 @@ public class DomFront {
             for (int i = 0; i < szNodes; i++) {
                 DomInfo info = domInfos[i];
                System.out.println("idom[" + i + "]: "
-                     + info.idom);
+                       + info.idom);
             }
         }
 

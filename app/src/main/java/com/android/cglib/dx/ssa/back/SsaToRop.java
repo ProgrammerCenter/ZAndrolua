@@ -104,11 +104,7 @@ public class SsaToRop {
 
         RegisterMapper mapper = allocator.allocateRegisters();
 
-        if (DEBUG) {
-            System.out.println("Printing reg map");
-            System.out.println(((BasicRegisterMapper)mapper).toHuman());
-        }
-
+        
         ssaMeth.setBackMode();
 
         ssaMeth.mapRegisters(mapper);
