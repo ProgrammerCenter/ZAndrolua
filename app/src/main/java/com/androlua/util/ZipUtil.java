@@ -108,7 +108,7 @@ public class ZipUtil
 				origin = new BufferedInputStream(fi, BUFFER.length);
 				int index=file.getAbsolutePath().indexOf(mainFileName);
 				String entryName=file.getAbsolutePath().substring(index);
-				System.out.println(entryName);
+				//System.out.println(entryName);
 				ZipEntry entry = new ZipEntry(entryName);
 				out.putNextEntry(entry);
 				//			byte[] data = new byte[BUFFER];
@@ -204,7 +204,7 @@ public class ZipUtil
                 String entryName=entry.getName();
                 
                 String newEntryName=destPath + "/" + entryName;
-                System.out.println(newEntryName);
+                ////System.out.println(newEntryName);
                 File temp=new File(newEntryName).getParentFile();
                 if (!temp.exists())
 				{
@@ -280,7 +280,7 @@ public class ZipUtil
 		while (entries.hasMoreElements()) 
 		{  
 			ZipEntry e = entries.nextElement(); 
-			System.out.println("copy: " + e.getName());  
+			//System.out.println("copy: " + e.getName());  
 			append.putNextEntry(e);  
 			if (!e.isDirectory()) 
 			{ 
@@ -290,7 +290,7 @@ public class ZipUtil
 		}  
 		// now append some extra content  
 		ZipEntry e = new ZipEntry(appendFilePath);  
-		System.out.println("append: " + e.getName()); 
+		//System.out.println("append: " + e.getName()); 
 		append.putNextEntry(e);  
 		copy(new FileInputStream(new File(appendFilePath)), append);
 		append.closeEntry();  

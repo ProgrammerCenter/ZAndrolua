@@ -796,14 +796,14 @@ public class LuaService extends Service implements LuaContext,LuaBroadcastReceiv
 				int length;
 				while ((byteread = inStream.read(buffer)) != -1) {
 					bytesum += byteread; //字节数 文件大小
-					System.out.println(bytesum);
+					//System.out.println(bytesum);
 					fs.write(buffer, 0, byteread);
 				}
 				inStream.close();
 			}
 		}
 		catch (Exception e) {
-			System.out.println("复制文件操作出错");
+
 			e.printStackTrace();
 
 		}

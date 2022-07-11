@@ -448,7 +448,7 @@ public class LuaUtil {
                 origin = new BufferedInputStream(fi, BUFFER.length);
                 //int index=file.getAbsolutePath().indexOf(mainFileName);
                 String entryName = mainFileName + file.getName();
-                System.out.println(entryName);
+                //System.out.println(entryName);
                 ZipEntry entry = new ZipEntry(entryName);
                 out.putNextEntry(entry);
                 //			byte[] data = new byte[BUFFER];
