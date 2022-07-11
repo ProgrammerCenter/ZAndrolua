@@ -90,7 +90,7 @@ public class DomFront {
             for (int i = 0; i < szNodes; i++) {
                 DomInfo info = domInfos[i];
                System.out.println("idom[" + i + "]: "
-                       + info.idom);
+                     + info.idom);
             }
         }
 
