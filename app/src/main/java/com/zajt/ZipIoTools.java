@@ -45,7 +45,7 @@ class ZipIoTools
 			e.printStackTrace();		
 
 		}		
-		System.gc();
+	
 		return retStr;
 	}
 
@@ -75,7 +75,7 @@ class ZipIoTools
 				return comment;			
 			}		
 		}				
-		System.gc();
+
 		return null;
 	}
 	public  static void addfile(String zipname, String files) throws java.io.IOException
@@ -104,7 +104,7 @@ class ZipIoTools
 		//关闭流
 		input.close();
 		zipOut.close();
-	System.gc();
+	
 	}
 	public void addfiles(String filename) throws java.io.IOException
 	{
