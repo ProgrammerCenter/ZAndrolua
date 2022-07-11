@@ -65,6 +65,7 @@ public class javaListTools extends MainjavaTools
                 rt.add(element);
             }
         }
+		
         return rt;
     }
 

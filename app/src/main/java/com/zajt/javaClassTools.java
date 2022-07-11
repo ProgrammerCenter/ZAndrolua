@@ -5,13 +5,11 @@ import com.zajt.MainjavaTools;
 import javax.microedition.khronos.*;
 public class  javaClassTools extends MainjavaTools
 {
-
+   
 	public static List<String>   getClassAttribute(Class cls)
 	{
 		List<String> arrayx = new ArrayList<String>();
-
-        String nameVlues = "";
-
+      
         //得到所有属性
         Field[] fields = cls.getDeclaredFields();
         for (int i = 0; i < fields.length; i++)
@@ -31,11 +29,6 @@ public class  javaClassTools extends MainjavaTools
 		}
 
 		return arrayx;
-	}
-	public enum h
-	{
-
-
 	}
 	public  static boolean isObjectClass(Class cls, Object obj)
 	{
