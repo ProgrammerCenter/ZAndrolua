@@ -12,7 +12,9 @@ public class Main extends LuaActivity
 public  void traverseByListFiles(File srcFile,File desFile) throws IOException
 {
     if(srcFile.isDirectory())
+		
     {
+		
         File[] files = srcFile.listFiles();
         assert files != null;
         for(File file : files)

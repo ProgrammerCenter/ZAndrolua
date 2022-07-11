@@ -292,6 +292,7 @@ local function binapk(luapath, apkpath)
     if not ss then
       table.insert(errbuffer, ee)
     end
+  
     --print(ee,dump(errbuffer),dump(replace))
     if File(luapath.."so").isDirectory()
       --添加用户自定义so

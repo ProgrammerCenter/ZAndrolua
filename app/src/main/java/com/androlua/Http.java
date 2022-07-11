@@ -34,6 +34,7 @@ public class Http {
     public static void setUserAgent(String userAgent) {
         if (sHeader == null)
             sHeader = new HashMap<>();
+			
         sHeader.put("User-Agent", userAgent);
     }
 
@@ -47,6 +48,7 @@ public class Http {
 
     public static HttpTask get(String url, LuaObject callback) {
         Http.HttpTask task = new HttpTask(url, "GET", null, null, null, callback);
+		
         task.execute();
         return task;
     }
@@ -71,7 +73,8 @@ public class Http {
 
     public static HttpTask get(String url, String cookie, String charset, LuaObject callback) {
         Http.HttpTask task = new HttpTask(url, "GET", cookie, charset, null, callback);
-        task.execute();
+     
+		task.execute();
         return task;
     }
 
