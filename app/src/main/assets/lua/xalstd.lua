@@ -5,17 +5,17 @@ xalstd.math={}
 xalstd.net={}
 function xalstd.net.getHtmls(Websites,Callfunc)
   require "socket"
-local http=require'http'
-if Callfunc
-Callfunc()
-end
-
-local body, statusCode, headers, statusText = 
-http.request(Websites)
-statusCode, headers, statusText=nil
-return body
+  local http=require'http'
+  if Callfunc
+    Callfunc()
   end
-function xalstd.math.ced(...)
+
+  local body, statusCode, headers, statusText =
+  http.request(Websites)
+  statusCode, headers, statusText=nil
+  return body
+end
+function xalstd.math.Coor_dist_calc(...)
   --计算坐标点间距离。
   local zyt={...}
   local zyt2={}
@@ -36,113 +36,107 @@ end
 
 xalstd.table.rep=function(V,Times)
   --一定长度重复key
-local  retT={}
- for cont=1,Times,1
-   do
-   table.insert(retT,V)
-   
-   end
- return retT
+  local retT={}
+  for cont=1,Times,1
+    do
+    table.insert(retT,V)
+
   end
--- log输出格式化
-local function logPrint(str)
-    str = os.date("\nLog output date: %Y-%m-%d %H:%M:%S \n", os.time()) .. str
-    print(str)
+  return retT
 end
- 
--- key值格式化
-local function formatKey(key)
-    local t = type(key)
-    if t == "number" then
-        return "["..key.."]"
-    elseif t == "string" then
-        local n = tonumber(key)
-        if n then
-            return "["..key.."]"
-        end
+
+ function xalstd.table.New_Stack()
+   --栈
+  local stack = {
+    tableList = {}
+  }
+  function stack:push(t)
+    table.insert(self.tableList, t)
+  end
+  function stack:pop()
+    return table.remove(self.tableList)
+  end
+  function stack:contains(t)
+    for _, v in ipairs(self.tableList) do
+      if v == t then
+        return true
+      end
     end
-    return key
-end
- 
--- 栈
-local function newStack()
-    local stack = {
-        tableList = {}
-    }
-    function stack:push(t)
-        table.insert(self.tableList, t)
-    end
-    function stack:pop()
-        return table.remove(self.tableList)
-    end
-    function stack:contains(t)
-        for _, v in ipairs(self.tableList) do
-            if v == t then
-                return true
-            end
-        end
-        return false
-    end
-    return stack
+    return false
+  end
+  return stack
 end
 -- 输出打印table表 函数
 function xalstd.table.printTable(...)
-    local args = {...}
-    for k, v in pairs(args) do
-        local root = v
-        if type(root) == "table" then
-            local temp = {
-                "------------------------ printTable start ------------------------\n",
-                "local tableValue".." = {\n",
-            }
-            local stack = newStack()
-            local function table2String(t, depth)
-                stack:push(t)
-                if type(depth) == "number" then
-                    depth = depth + 1
-                else
-                    depth = 1
-                end
-                local indent = ""
-                for i=1, depth do
-                    indent = indent .. "    "
-                end
-                for k, v in pairs(t) do
-                    local key = tostring(k)
-                    local typeV = type(v)
-                    if typeV == "table" then
-                        if key ~= "__valuePrototype" then
-                            if stack:contains(v) then
-                                table.insert(temp, indent..formatKey(key).." = {检测到循环引用!},\n")
-                            else
-                                table.insert(temp, indent..formatKey(key).." = {\n")
-                                table2String(v, depth)
-                                table.insert(temp, indent.."},\n")
-                            end
-                        end
-                    elseif typeV == "string" then
-                        table.insert(temp, string.format("%s%s = \"%s\",\n", indent, formatKey(key), tostring(v)))
-                    else
-                        table.insert(temp, string.format("%s%s = %s,\n", indent, formatKey(key), tostring(v)))
-                    end
-                end
-                stack:pop()
-            end
-            table2String(root)
-            table.insert(temp, "}\n------------------------- printTable end -------------------------")
-            logPrint(table.concat(temp))
-        else
-            logPrint("----------------------- printString start ------------------------\n"
-                 .. tostring(root) .. "\n------------------------ printString end -------------------------")
-        end
-    end
-end
-xalstd.string.shea=function (s,st,te,co)
-  local s1=string.sub(s,0,st)
-  local s2=string.sub(s,te,-0)
-  
-  return s1..co..s2
+  -- log输出格式化
+  local function logPrint(str)
+    str = os.date("\nLog output date: %Y-%m-%d %H:%M:%S \n", os.time()) .. str
+    print(str)
   end
+
+  -- key值格式化
+  local function formatKey(key)
+    local t = type(key)
+    if t == "number" then
+      return "["..key.."]"
+     elseif t == "string" then
+      local n = tonumber(key)
+      if n then
+        return "["..key.."]"
+      end
+    end
+    return key
+  end
+  local args = {...}
+  for k, v in pairs(args) do
+    local root = v
+    if type(root) == "table" then
+      local temp = {
+        "------------------------ printTable start ------------------------\n",
+        "local tableValue".." = {\n",
+      }
+      local stack = newStack()
+      local function table2String(t, depth)
+        stack:push(t)
+        if type(depth) == "number" then
+          depth = depth + 1
+         else
+          depth = 1
+        end
+        local indent = ""
+        for i=1, depth do
+          indent = indent .. "    "
+        end
+        for k, v in pairs(t) do
+          local key = tostring(k)
+          local typeV = type(v)
+          if typeV == "table" then
+            if key ~= "__valuePrototype" then
+              if stack:contains(v) then
+                table.insert(temp, indent..formatKey(key).." = {检测到循环引用!},\n")
+               else
+                table.insert(temp, indent..formatKey(key).." = {\n")
+                table2String(v, depth)
+                table.insert(temp, indent.."},\n")
+              end
+            end
+           elseif typeV == "string" then
+            table.insert(temp, string.format("%s%s = \"%s\",\n", indent, formatKey(key), tostring(v)))
+           else
+            table.insert(temp, string.format("%s%s = %s,\n", indent, formatKey(key), tostring(v)))
+          end
+        end
+        stack:pop()
+      end
+      table2String(root)
+      table.insert(temp, "}\n------------------------- printTable end -------------------------")
+      logPrint(table.concat(temp))
+     else
+      logPrint("----------------------- printString start ------------------------\n"
+      .. tostring(root) .. "\n------------------------ printString end -------------------------")
+    end
+  end
+end
 --深度拷贝table
 xalstd.table.copy=function (obj)
   local lookUpTable = {}
@@ -228,24 +222,24 @@ xalstd.files.flieBinddr_hex=function (pathss)
   end
   return 结果
 end
-function  xalstd.files.faf(file,Filters)
+function xalstd.files.faf(file,Filters)
   import "java.io.File"
-local function getFiles(file,Filters)
+  local function getFiles(file,Filters)
 
-  files=file.listFiles();
+    files=file.listFiles();
 
-  for k,f in ipairs(luajava.astable(files))
+    for k,f in ipairs(luajava.astable(files))
 
-    if(f.isDirectory())
+      if(f.isDirectory())
 
-      getFiles(f,Filters);
-     else
+        getFiles(f,Filters);
+       else
 
-      Filters(f)
+        Filters(f)
+      end
     end
   end
-end
-getFiles(File(file),Filters)
+  getFiles(File(file),Filters)
 end
 xalstd.files.flieBinddr_Decs=function (pathss)
   local file = io.open(pathss, "rb")
@@ -394,7 +388,7 @@ function xalstd.Ini_operation.load(fileName)
   return data;
 end
 --检测VPN网络代理
-function xalstd.VPK()
+function xalstd.VPN_detection()
   import "java.net.NetworkInterface"
   import "java.util.Collections"
   import "java.util.Enumeration"
@@ -406,8 +400,8 @@ function xalstd.VPK()
       local intf = it.next()
       if intf.isUp() and intf.getInterfaceAddresses().size() ~= 0 then
         if String("tun0").equals(intf.getName()) or String("ppp0").equals(intf.getName()) then
-       --如果检测到vpn就返回true
-       return true
+          --如果检测到vpn就返回true
+          return true
         end
       end
     end
@@ -452,7 +446,7 @@ function xalstd.table.merge( tDest, tSrc )
     tDest[k] = v
   end
 end
-function xalstd.files.ShareFiles(path)
+function xalstd.files.Share_Files(path)
   if(Build.VERSION.SDK_INT >= 24)
     import "android.webkit.MimeTypeMap"
     import "android.content.Intent"

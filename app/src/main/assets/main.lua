@@ -1,3 +1,15 @@
+base = activity.getSharedPreferences("Startupmain",activity.MODE_PRIVATE);
+isFirstStart = base.getBoolean("isFirstStart",true);
+intent = nil;
+--代表第一次启动App
+if(isFirstStart)
+ luajava.bindClass("com.androlua.LuaUtil").copyDir("/data/user/0/"..activity.getPackageName().."/files/lua/",
+      "/data/user/0/"..activity.getPackageName().."/app_lua/" )
+  editor = base.edit();
+  editor.putBoolean("isFirstStart",false);
+  editor.commit();
+end
+
 require "import"
 import "console"
 import "android.app.*"
@@ -1748,7 +1760,7 @@ editor.addPackage("javaClassTools",
 editor.addPackage("ZipIoTools",{
   "addfile",
   "extractZipComment"
-  })
+})
 
 function fix(c)
   local classes = require "javaapi.android"
