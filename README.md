@@ -63,10 +63,12 @@ http://www.lua.org
 Android 中文API：
 http://android.toolib.net/reference/packages.html
 
-#调用javaAPI例子
+# 调用javaAPI例子
   创建java对象
   ```Lua
   object=Object()
+  --Object varName=ClassName(Constructor argument list)
+  --存储对象的变量名称=对象类的名称(对象类的构造方法参数列表)
   ```
   创建安卓控件对象，并设置为当前显示控件
   ```Lua
