@@ -1,6 +1,5 @@
 package com.zajt;
 import java.util.*;
-
 public class javaListTools extends MainjavaTools
 {
 
@@ -11,6 +10,7 @@ public class javaListTools extends MainjavaTools
             return Collections.emptyList();
         }
         int total = 1;
+		
         //声明进位指针cIndex
         int cIndex = sets.length - 1;
         //声明counterMap(角标 - counter)

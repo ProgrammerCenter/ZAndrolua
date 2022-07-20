@@ -3,6 +3,7 @@ import java.util.*;
 import java.lang.reflect.*;
 import com.zajt.MainjavaTools;
 import javax.microedition.khronos.*;
+import android.graphics.Bitmap;
 public class  javaClassTools extends MainjavaTools
 {
    
