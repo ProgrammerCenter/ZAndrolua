@@ -85,15 +85,15 @@ tv.Text="文本控件"
   --调用当前activity的setContentView方法设置tv为当前显示控件对象
   ```
 实现转换java Enumeration为用于Lua迭代的闭包
-``` Lua
+```Lua
 Lua迭代的闭包=enum(实现Enumeration接口的Java对象)
-``` Lua
+```
 转换为java Iterable接口为用于Lua迭代的闭包
-``` Lua
-each(java Iterable接口)
-``` Lua
+```Lua
+Lua迭代的闭包=each(java Iterable接口)
+```
 递归搜索文件实例
-``` Lua
+```Lua
 function find(catalog,name)
   local n=0
   local t=os.clock()
