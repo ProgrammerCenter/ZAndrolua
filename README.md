@@ -86,11 +86,11 @@ tv.Text="文本控件"
   ```
 实现转换java Enumeration为用于Lua迭代的闭包
 ```Lua
-Lua迭代的闭包=enum(实现Enumeration接口的Java对象)
+Lua迭代的闭包=luajava.enum(实现Enumeration接口的Java对象)
 ```
 转换为java Iterable接口为用于Lua迭代的闭包
 ```Lua
-Lua迭代的闭包=each(java Iterable接口)
+Lua迭代的闭包=luajava.each(java Iterable接口)
 ```
 递归搜索文件实例
 ```Lua
