@@ -303,7 +303,7 @@ public class ColorFinder {
         return mHeight - y - h;
     }
 
-    private int check2(int x, int y, int[][] color, int h, int w, int o) {
+    /*private int check2(int x, int y, int[][] color, int h, int w, int o) {
         for (int i = 0; i < mHeight - y - h; i++) {
             if (!(color[x][y + i] == 0 && color[x + o][y + i] == 1 && color[x + o + w][y + i] == 1)) {
                 if (i > h)
@@ -337,5 +337,5 @@ public class ColorFinder {
             }
         }
         return mHeight - y - h;
-    }
+    }*/
 }
