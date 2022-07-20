@@ -70,14 +70,15 @@ http://android.toolib.net/reference/packages.html
   ```
   创建安卓控件对象，并设置为当前显示控件
   ```Lua
-  require "import"
-import 
-  "android.widget.TextView"
-  
+require "import"
+--导入import模块
+import "android.widget.TextView"
+--用import导入TextView类
 tv=TextView(activity)
-  
+--创建TextView对象，activity指的就是当前的activity对象
 tv.Text="文本控件"
-
+--设置文本
   activity.setContentView(tv)
+  --调用当前activity的setContentView方法设置tv为当前显示控件对象
   ```
   
