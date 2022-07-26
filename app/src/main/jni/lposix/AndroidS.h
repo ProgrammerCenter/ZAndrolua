@@ -28,7 +28,7 @@ lua_pushstring(L,OSCN);
 		
 return 1;
 }
-int static AndroidNameeq(lua_State* L)
+int static AN(lua_State* L)
 {
 	
 char OSCNA[256] = "0";
@@ -59,7 +59,7 @@ int lposix_android(lua_State* L)
 					{"ASDKV",LASDKV},
 					{"AOSV",AOSV},
 					{"AOSCN",LCONA},
-					{"ACPB",AndroidNameeq},
+					{"ACPB",AN},
 					{"ACPUV",LACPUR},
 					{NULL,NULL}
 		  };
