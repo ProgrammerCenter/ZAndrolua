@@ -26,5 +26,23 @@ abort();
 		  return 1;
 }
 
+int lposix_Linux(lua_State* L)
+{
+		  lua_getglobal(L,"lposix");
+		  
+  static const luaL_Reg lposix_Linux_fun[]={
+				
+					{"gnu_get_libc_version",lgnu_get_libc_version},
+					{"putchar",lputchar},
+					{"abort",labort},
+					{"perror",lperror},
+					
+					{NULL,NULL}
+		  };
+		  luaL_newlib(L,lposix_Linux_fun);
+		  lua_setfield(L,1,"Linux");
+		  return 1;
+}
+
  
 

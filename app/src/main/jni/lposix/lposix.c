@@ -2,13 +2,10 @@
 /*需要被调用的C语言函数*/
 #include "lenvset.h"
 //编译控制以及测试开关头文件
-#include "COOSIF.h"
+#include "ctosd.h"
 #include "posix_import.h"
-#include "OSBLL.h"
-#include "ESA.h"
-//判断操作系统ESA扩展
-char * PLATFORM_ID_VAR=PLATFORM_ID;
-static int dome(lua_State* L)
+#include "lposix_init.h"
+/*static int dome(lua_State* L)
 {
     //检查栈中的参数是否合法，1表示Lua调用时的第一个参数(从左到右)，依此类推。
     //如果Lua代码在调用时传递的参数不为number，该函数将报错并终止程序的执行。
@@ -19,7 +16,43 @@ static int dome(lua_State* L)
 	
     //返回值用于提示该C函数的返回值数量，即压入栈中的返回值数量。
     return 1;
+}*/
+
+
+int luname(lua_State *L)
+{
+	struct utsname  unames;
+	
+	uname(&unames);
+	
+	lua_newtable(L);//创建一个表格，放在栈顶
+	lua_pushstring(L, "sysname");//压入key
+	lua_pushstring(L,unames.sysname);//压入value
+	lua_settable(L,-3);//弹出key,value，并设置到table里面去
+	lua_pushstring(L, "nodename");
+	lua_pushstring(L,unames.nodename);
+	lua_settable(L,-3);
+	lua_pushstring(L, "release");
+	lua_pushstring(L,unames.release);
+	lua_settable(L,-3);
+	lua_pushstring(L, "version");
+	lua_pushstring(L,unames.version);
+	lua_settable(L,-3);
+	lua_pushstring(L, "machine");
+	lua_pushstring(L,unames.machine);
+	lua_settable(L,-3);
+	  #if defined (__ANDROID__)
+	  #else
+	lua_pushstring(L, "__domainname");
+	lua_pushstring(L,unames.__domainname);
+	lua_settable(L,-3);
+	  #endif
+	
+	return 1;//堆栈里现在就一个table.其他都被弹掉了。
 }
+ 
+ 
+
 static int laccess(lua_State* L)
 {
 	//等同posix标准定义的，access函数
@@ -53,14 +86,6 @@ static int lputenv(lua_State* L)
   
     return 1;
 }
-struct utsname sysm;
-static int losname (lua_State* L){
-	//等同posix标准定义的uname函数处理过的utsname结构体的sysname成员值
-	uname(&sysm);
-	char * sysmes=sysm.sysname;
-    lua_pushstring(L,sysmes);
-	return 1;
-}
 static int lsetenv(lua_State* L)
 {
 	//等同posix标准定义 setenv函数
@@ -72,28 +97,6 @@ static int lsetenv(lua_State* L)
   
 
     return 1;
-}
-
-static int losrelease (lua_State* L){
-	//等同posix标准定义的uname函数处理过的utsname结构体的release成员值
-	uname(&sysm);
-	char * sysrelease=sysm.release;
-    lua_pushstring(L,sysrelease);
-	return 1;
-}
-static int losversion (lua_State* L){
-	//等同posix标准定义的uname函数处理过的utsname结构体的version成员值
-	uname(&sysm);
-	char * osversions=sysm.version;
-    lua_pushstring(L,osversions);
-	return 1;
-}
-static int losmachine (lua_State* L){
-	uname(&sysm);
-	char * osmachine=sysm.machine;
-	//等同posix标准定义的uname函数处理过的utsname结构体的machine成员值
-    lua_pushstring(L,osmachine);
-	return 1;
 }
 static int lsysconf(lua_State* L)
 {
@@ -115,17 +118,13 @@ int luaopen_lposix(lua_State* L)
 
 	
   static const luaL_Reg l[]={
-	  {"posix_putenv",lputenv},
-	  {"posix_setenv",lsetenv},
-	  {"posix_access",laccess},
-	  {"posix_osname",losname},
-	  {"posix_machine",losmachine},
-	  {"posix_release",losrelease},
-	  {"posix_symlink",lsymlink},
-	  {"posix_sysconf",lsysconf},
-      {"ESA_OSN",lOSN},
-	  {"init",OSBII},
-	  {"ESA_CPUA",CPUA},
+	  {"putenv",lputenv},
+	  {"setenv",lsetenv},
+	  {"access",laccess},
+	  {"symlink",lsymlink},
+	  {"sysconf",lsysconf},
+	  {"init",lposix_init},
+	  {"uname",luname},
 	  {NULL,NULL}};
 	  
    

@@ -54,7 +54,6 @@ public class CompileUtils
     {
         return getFiles("soft", path);
     }
-
     private static List<String> getFiles(String extension, String path)
     {
         List<String> list = new ArrayList<String>();
