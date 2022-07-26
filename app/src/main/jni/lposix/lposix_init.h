@@ -12,7 +12,9 @@ static int lposix_init(lua_State* L)
 		  #if defined (__ANDROID__)
 		  lposix_android(L);
 		  #endif
-		  
+		  #if defined(OS_Linux)
+		  lposix_Linux(L);
+		  #endif
 		  
 		 return 0;
 }
