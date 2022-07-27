@@ -18,7 +18,7 @@ public class ScreenCaptureActivity extends Activity {
     public static final int REQUEST_MEDIA_PROJECTION = 18;
     private TextView view;
     private ArrayList<String> permissions;
-
+  
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

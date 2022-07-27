@@ -7,8 +7,10 @@
 #include <pwd.h>
 #include <regex.h>
 #include <tar.h>
+#include <sys/resource.h>
 #include <termios.h>
 #include <unistd.h>
+#include <sys/utsname.h>
 #include <utime.h>
 #include <arpa/inet.h>
 #include <net/if.h>

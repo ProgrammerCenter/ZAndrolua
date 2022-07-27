@@ -104,6 +104,8 @@ function onVersionChanged(n, o)
   提升LuaActivity加载速度
   ，增加activity.isXposed、activity.prevent_Xpose
   方法
+  0.0.8
+  lposix模块强化(注意lposix模块加载后需要使用lposix.init()函数进行初始化，否则可能会出现不可知错误)
   ]]
   if o == "" then
     File("/sdcard/AndroLua/xaplug").mkdir()
@@ -1746,11 +1748,12 @@ end
 editor.addNames({"activity","javaClassTools","ZipIoTools","lposix"})
 editor.addPackage("activity",buf)
 editor.addPackage("lposix",
-{"posix_symlink",
-  "posix_osname",
-  "posix_putenv",
-  "posix_access",
-  "posix_putenv"})
+{"symlink",
+  "osname",
+  "putenv",
+  "access",
+  "init",
+  "putenv"})
 editor.addPackage("javaClassTools",
 {"getClassAttribute",
   "isObjectClass",
