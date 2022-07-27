@@ -3,8 +3,10 @@
 #include "lenvset.h"
 //编译控制以及测试开关头文件
 #include "ctosd.h"
+#include "impostdlib.h"
 #include "posix_import.h"
 #include "lposix_init.h"
+#include "luaT.h"
 /*static int dome(lua_State* L)
 {
     //检查栈中的参数是否合法，1表示Lua调用时的第一个参数(从左到右)，依此类推。
@@ -19,7 +21,13 @@
 }*/
 
 
-int luname(lua_State *L)
+ static int lsync(lua_State *L){
+	
+	sync();
+	
+}
+
+static int luname(lua_State *L)
 {
 	struct utsname  unames;
 	
@@ -61,6 +69,13 @@ static int laccess(lua_State* L)
   lua_pushnumber(L,access(ptna,(int)modus));
 	return 1;
 }
+static int lrmdir(lua_State* L){
+	
+char* path= luaL_checkstring(L,1);
+int iserro=rmdir(path);
+lua_pushnumber(L,iserro);
+return 1;
+}
 static int lgetenv(lua_State* L)
 {
 	//等同posix标准定义的，getenv函数
@@ -95,7 +110,7 @@ static int lsetenv(lua_State* L)
 	
     lua_pushnumber(L,setenv(name,value,rewrite));
   
-
+   
     return 1;
 }
 static int lsysconf(lua_State* L)
@@ -120,11 +135,13 @@ int luaopen_lposix(lua_State* L)
   static const luaL_Reg l[]={
 	  {"putenv",lputenv},
 	  {"setenv",lsetenv},
+	  {"rmdir",lrmdir},
 	  {"access",laccess},
 	  {"symlink",lsymlink},
 	  {"sysconf",lsysconf},
 	  {"init",lposix_init},
 	  {"uname",luname},
+	  {"sync",lsync},
 	  {NULL,NULL}};
 	  
    

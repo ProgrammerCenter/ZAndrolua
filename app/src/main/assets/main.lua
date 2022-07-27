@@ -1746,11 +1746,12 @@ end
 editor.addNames({"activity","javaClassTools","ZipIoTools","lposix"})
 editor.addPackage("activity",buf)
 editor.addPackage("lposix",
-{"posix_symlink",
-  "posix_osname",
-  "posix_putenv",
-  "posix_access",
-  "posix_putenv"})
+{"symlink",
+  "osname",
+  "putenv",
+  "access",
+  "init",
+  "putenv"})
 editor.addPackage("javaClassTools",
 {"getClassAttribute",
   "isObjectClass",
