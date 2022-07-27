@@ -104,6 +104,8 @@ function onVersionChanged(n, o)
   提升LuaActivity加载速度
   ，增加activity.isXposed、activity.prevent_Xpose
   方法
+  0.0.8
+  lposix模块强化
   ]]
   if o == "" then
     File("/sdcard/AndroLua/xaplug").mkdir()
