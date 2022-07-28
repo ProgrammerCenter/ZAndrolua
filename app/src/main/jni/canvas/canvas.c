@@ -55,7 +55,6 @@ static jmethodID drawbitmap2_method = NULL;
 static jmethodID drawbitmap3_method = NULL;
 static jmethodID drawbitmap4_method = NULL;
 static jmethodID drawbitmap5_method = NULL;
-
 static jmethodID drawbitmapmesh_method = NULL;
 static jmethodID drawcircle_method = NULL;
 
