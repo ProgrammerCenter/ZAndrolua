@@ -1,6 +1,5 @@
-require "import"
-import "android.widget.*"
-import "android.view.*"
+File=luajava.bindClass("java.io.File")
+LuaUtil=luajava.bindClass("com.androlua.LuaUtil")
 zajargen={}
 function zajargen.LuaTable2jarMFA(luatble)
   local retstr=""
@@ -8,9 +7,9 @@ function zajargen.LuaTable2jarMFA(luatble)
   for k,v pairs(luatble)
     if type(k)=="number"
       if type(v)=="table"
-       retstr=retstr..k..": "..table.concat(v," ")
+        retstr=retstr..k..": "..table.concat(v," ")
        else
-     retstr=retstr..k..": "..v
+        retstr=retstr..k..": "..v
       end
     end
   end
@@ -25,8 +24,6 @@ function zajargen.zajargens(IputDir,
   Created_By,
   usermfa,
   ClassPath)
-  import "java.io.File"
-  import "com.androlua.LuaUtil"
   local Relativeoutputpath
   local Startstr
   local Terminate

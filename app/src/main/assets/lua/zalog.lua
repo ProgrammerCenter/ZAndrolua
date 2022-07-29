@@ -1,6 +1,3 @@
-require "import"
-import "android.widget.*"
-import "android.view.*"
 zalog={}
 zalog.f="/storage/emulated/0/AndroLua/logs/mlog"
 zalog.strlog=function(str)
