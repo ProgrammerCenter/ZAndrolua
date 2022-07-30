@@ -146,7 +146,7 @@ return {
   "com.androlua.LuaWebView$SimpleLuaWebViewClient",
   "com.androlua.LuaWebView",
   "com.androlua.NineBitmapDrawable",
-  "com.androlua.R$drawable",
+  "com.androlua.Z.R$drawable",
   "com.androlua.R$string",
   "com.androlua.R$style",
   "com.androlua.R$xml",

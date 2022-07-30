@@ -6,6 +6,7 @@ import  java.io.*;
 import java.io.File;
 import android.content.*;
 import android.net.*;
+import android.widget.*;
 public class Main extends LuaActivity
 {
 	private Uri MopenFile=null;

@@ -9,6 +9,7 @@ public class  javaClassTools extends MainjavaTools
    
 	public static List<String>   getClassAttribute(Class cls)
 	{
+
 		List<String> arrayx = new ArrayList<String>();
       
         //得到所有属性

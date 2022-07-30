@@ -7,13 +7,12 @@ import "java.io.File"
 import "layout"
 import "item"
 import "autotheme"
-
+import "com.androlua.Z.R$drawable"
 activity.setTitle('插件')
 activity.setTheme(autotheme())
 activity.setContentView(loadlayout(layout))
 local luadir,luapath=...
 local plugindir=activity.getLuaExtDir("plugin")
-
 local function getinfo(dir)
   local app={}
   loadfile(plugindir.."/"..dir.."/init.lua","bt",app)()
@@ -39,7 +38,8 @@ function checkicon(i)
     f:close()
     return i
   else
-    return android.R.drawable.icon
+  
+    return drawable.icon
   end
 end
 

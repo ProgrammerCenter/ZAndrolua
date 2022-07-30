@@ -392,11 +392,6 @@ m = {
       id = "more_manual", },
 
   },
-  { SubMenu,
-    title = "项目依赖与文件信息相关",
-    { MenuItem,
-      title = "文件信息(XaLdoc)",
-      id = "more_XaLdocs", },},
   { MenuItem,
     title = "插件...",
     id = "plugin", },
@@ -405,9 +400,6 @@ m = {
     {MenuItem,
       title = "本软件github仓库",
       id = "more_gits"},
-    { MenuItem,
-      title = "unciv模组开发文档",
-      id = "more_ucmdoc", },
     { MenuItem,
       title = "文件管理器(xavim)",
       id = "more_LFMI"},
@@ -1145,10 +1137,6 @@ end
 func.LFMI = function()
   activity.newActivity("LFMI")
 end
-func.ucmdoc = function()
-  activity.newActivity("ucmdoc")
-
-end
 func.help = function()
   activity.newActivity("help")
 end
@@ -1177,11 +1165,6 @@ func.openandroweb=function()
   local url="https://developer.android.google.cn/"
   viewIntent = Intent("android.intent.action.VIEW",Uri.parse(url))
   activity.startActivity(viewIntent)
-end
-func.XaLdocs = function()
-  save()
-  Toast.makeText(activity, "为了运行此功能，文件已自动保存." , Toast.LENGTH_SHORT ).show()
-  activity.newActivity("xaLduis", {luapath})
 end
 func.helper = function()
   save()
@@ -1223,7 +1206,6 @@ end
 
 func.fiximport = function()
   save()
-
   activity.newActivity("javaapi/fiximport", { luaproject, luapath })
 end
 func.plugin = function()
@@ -1273,12 +1255,9 @@ function onMenuItemSelected(id, item)
     [optmenu.more_apke]=func.apke,
     [optmenu.more_setting]=func.settingEditor,
     [optmenu.more_TLFMI]=func.TLFMI,
-    [optmenu.more_ucmdoc]=func.ucmdoc,
     [optmenu.openweb_openandroweb]=func.openandroweb,
     [optmenu.openweb_openjavaweb]=func.openjavaweb,
     [optmenu.openweb_openjavaenweb]=func.openjavaenweb,
-    [optmenu.more_XaLdocs]=func.XaLdocs,
-
     [optmenu.more_xacfExport]=func.xacfExport
   }
 end
