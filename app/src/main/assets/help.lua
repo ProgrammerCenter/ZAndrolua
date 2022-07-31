@@ -36,6 +36,10 @@ https://github.com/brimworks/lua-zlib
 xml
 https://github.com/chukong/quick-cocos2d-x
 
+xmlSimple
+https://github.com/Cluain/Lua-Simple-XML-Parser
+
+
 luv
 https://github.com/luvit/luv
 https://github.com/clibs/uv
