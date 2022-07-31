@@ -63,6 +63,7 @@ public class  javaClassTools extends MainjavaTools
 
 			//得到属性
 			Field field = fields[i];
+		
 			//打开私有访问
 			field.setAccessible(true);
 			//获取属性

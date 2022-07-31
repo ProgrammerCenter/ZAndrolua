@@ -17,9 +17,7 @@ dir,path=...
 --path=luajava.luapath
 --path=luajava.luapath
 function fiximport(path)
-  if path==nil
-    return
-    end
+  if path
   require "import"
   import "android.app.*"
   import "android.os.*"
@@ -84,6 +82,7 @@ function fiximport(path)
   checkclass(path,ret)
 
   return String(ret)
+  end
 end
 list=ListView(activity)
 list.ChoiceMode=ListView.CHOICE_MODE_MULTIPLE;
