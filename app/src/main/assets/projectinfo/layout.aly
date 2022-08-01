@@ -69,27 +69,27 @@
         layout_width="fill";
         singleLine="true";
       };
-            {
-              TextView;
-              text="key";
-            };
-            {
-              EditText;
-              id="app_key";
-              layout_width="fill";
-              singleLine="true";
-            };
-            {
-              TextView;
-              text="渠道";
-            };
-            {
-              EditText;
-              id="app_channel";
-              layout_width="fill";
-              singleLine="true";
-            };
-            {
+      {
+        TextView;
+        text="key";
+      };
+      {
+        EditText;
+        id="app_key";
+        layout_width="fill";
+        singleLine="true";
+      };
+      {
+        TextView;
+        text="渠道";
+      };
+      {
+        EditText;
+        id="app_channel";
+        layout_width="fill";
+        singleLine="true";
+      };
+      {
         TextView;
         text="作者";
       };

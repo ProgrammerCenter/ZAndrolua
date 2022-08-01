@@ -11,6 +11,7 @@ public class VolatileBox<T> {
 
     public VolatileBox(T value) {
         set(value);
+		
     }
 
     public T get() {

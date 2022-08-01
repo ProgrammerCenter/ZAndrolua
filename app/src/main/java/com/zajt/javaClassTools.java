@@ -29,7 +29,6 @@ public class  javaClassTools extends MainjavaTools
 			arrayx.add(field.getName());
 
 		}
-
 		return arrayx;
 	}
 	public  static boolean isObjectClass(Class cls, Object obj)

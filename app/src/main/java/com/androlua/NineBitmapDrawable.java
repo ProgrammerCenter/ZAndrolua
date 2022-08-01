@@ -135,6 +135,7 @@ public class NineBitmapDrawable extends Drawable implements LuaGcable {
 
         canvas.drawBitmap(mBitmap, mRect7, rect7, mPaint);
         canvas.drawBitmap(mBitmap, mRect8, rect8, mPaint);
+		
         canvas.drawBitmap(mBitmap, mRect9, rect9, mPaint);
     }
 

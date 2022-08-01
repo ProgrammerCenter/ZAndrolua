@@ -19,7 +19,9 @@ public class javaListTools extends MainjavaTools
 		{
             counterMap[i] = 0;
             total *= (sets[i] == null || sets[i].length == 0 ? 1 : sets[i].length);
-        }
+        
+		
+			}
         List<List<T>> rt = new ArrayList<>(total);
         //开始求笛卡尔积
         while (cIndex >= 0)
