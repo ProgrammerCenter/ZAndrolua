@@ -2,51 +2,55 @@
 lua 5.3.3 for android pro Zenith
 
 ZAndrolua基于AndroluAndrolua4.4.2
-AndroLua是基于LuaJava开发的安卓平台轻量级脚本编程语言工具，既具有Lua简洁优雅的特质，又支持绝大部分安卓API，可以使你在手机上快速编写小型应用。
-官方QQ群：236938279
-http://jq.qq.com/?_wv=1027&k=dcofRr
-百度贴吧：
-http://c.tieba.baidu.com/mo/m?kw=androlua
-项目地址：
-http://sf.net/p/androlua
-点击链接支持Androlua作者的工作，一块也可以哦：
-https://qr.alipay.com/apt7ujjb4jngmu3z9a
+AndroLua是基于LuaJava开发的安卓平台轻量级脚本编程语言工具，既具有Lua简洁优雅的特质，又支持绝大部分安卓API，可以使你在手机上快速编写小型应用。  
+Androlua官方QQ群：236938279  
+http://jq.qq.com/?_wv=1027&k=dcofRr  
+Androlua百度贴吧：  
+http://c.tieba.baidu.com/mo/m?kw=androlua  
+Androlua项目地址：  
+http://sf.net/p/androlua  
+点击链接支持Androlua作者的工作，一块也可以哦：  
+https://qr.alipay.com/apt7ujjb4jngmu3z9a  
 
-本程序使用了以下开源项目部分代码
+本程序使用了以下开源项目部分代码  
 
-bson,crypt,md5
-https://github.com/cloudwu/skynet
+bson,crypt,md5  
+https://github.com/cloudwu/skynet  
 
-cjson
-https://sourceforge.net/projects/cjson/
+cjson  
+https://sourceforge.net/projects/cjson/  
 
-zlib
-https://github.com/brimworks/lua-zlib
+zlib  
+https://github.com/brimworks/lua-zlib  
 
-xml
-https://github.com/chukong/quick-cocos2d-x
+xml  
+https://github.com/chukong/quick-cocos2d-x  
 
-luv
-https://github.com/luvit/luv
-https://github.com/clibs/uv
+luv  
+https://github.com/luvit/luv  
+https://github.com/clibs/uv  
 
 zip
-https://github.com/brimworks/lua-zip
-https://github.com/julienr/libzip-android
+https://github.com/brimworks/lua-zip  
+https://github.com/julienr/libzip-android  
 
 luagl
 http://luagl.sourceforge.net/
 
 luasocket
-https://github.com/diegonehab/luasocket
+https://github.com/diegonehab/luasocket  
 
-sensor
+xmlSimple  
+https://github.com/Cluain/Lua-Simple-XML-Parser
+
+
+sensor  
 https://github.com/ddlee/AndroidLuaActivity
 
-canvas
+canvas  
 由落叶似秋开发
 
-jni
+jni  
 由nirenr开发
 
 
