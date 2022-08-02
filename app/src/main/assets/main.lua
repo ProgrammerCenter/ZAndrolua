@@ -106,6 +106,8 @@ function onVersionChanged(n, o)
   方法
   0.0.8
   lposix模块强化(注意lposix模块加载后需要使用lposix.init()函数进行初始化，否则可能会出现不可知错误)
+  1.0.0
+  全面优化软件
   ]]
   if o == "" then
     File("/sdcard/AndroLua/xaplug").mkdir()

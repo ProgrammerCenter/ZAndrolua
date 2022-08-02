@@ -24,7 +24,7 @@ luaproject=projectdir.."/init.lua"
 app={}
 loadfile(luaproject,"bt",app)()
 appname.Text=app.appname or "AndroLua"
-appver.Text=app.appver or "1.0"
+appTargetSdk.Text=app.appSdk_target or "23"
 appcode.Text=app.appcode or "1"
 appsdk.Text=app.appsdk or "15"
 path_pattern.Text=app.path_pattern or ""
@@ -34,7 +34,7 @@ description.Text=app.description or ""
 debugmode.Checked=app.debugmode==nil or app.debugmode
 app_key.Text=app.app_key or ""
 app_channel.Text=app.app_channel or ""
-
+appver.Text=app.appver or "1.0"
 plist.ChoiceMode=ListView.CHOICE_MODE_MULTIPLE;
 pss={}
 ps={}
@@ -91,6 +91,7 @@ path_pattern="%s"
 packagename="%s"
 theme="%s"
 app_key="%s"
+appSdk_target="%s"
 app_channel="%s"
 developer="%s"
 description="%s"
@@ -124,7 +125,7 @@ function onOptionsItemSelected(item)
     end
   end
   local thm=tss[tlist.getSelectedItemPosition()+1]
-  local ss=string.format(template,appname.Text,appver.Text,appcode.Text,appsdk.Text,path_pattern.Text,packagename.Text,thm,app_key.Text,app_channel.Text,developer.Text,description.Text,debugmode.isChecked(),dump(rs))
+  local ss=string.format(template,appname.Text,appver.Text,appcode.Text,appsdk.Text,path_pattern.Text,packagename.Text,thm,app_key.Text,appTargetSdk.Text,app_channel.Text,developer.Text,description.Text,debugmode.isChecked(),dump(rs))
   local f=io.open(luaproject,"w")
   f:write(ss)
   f:close()

@@ -41,6 +41,16 @@
       };
       {
         TextView;
+        text="TargetSDK";
+      };
+      {
+        EditText;
+        id="appTargetSdk";
+        layout_width="fill";
+        singleLine="true";
+      };
+      {
+        TextView;
         text="SDK";
       };
       {

@@ -2,9 +2,7 @@ package com.zajt;
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
 import java.io.*;
-import android.graphics.*;
 class ZipIoTools
 {
 	private String ZipName="";
@@ -30,6 +28,7 @@ class ZipIoTools
 			File file = new File(filename);		
 			int fileLen = (int)file.length();			          
 			FileInputStream in = new FileInputStream(file);		
+			
 			/* The whole ZIP comment (including the magic byte sequence)			* MUST fit in the buffer			* otherwise, the comment will not be recognized correctly			*			* You can safely increase the buffer size if you like			*/		
 			byte[] buffer = new byte[Math.min(fileLen, 8192)];	
 			int len;

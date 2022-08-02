@@ -8,6 +8,7 @@ import "java.io.FileInputStream"
 import "android.content.Intent"
 import "java.security.Signer"
 import "java.util.ArrayList"
+import "java.util.zip.ZipFile"
 import "java.io.FileOutputStream"
 import "java.io.BufferedOutputStream"
 import "java.util.zip.ZipInputStream"
@@ -25,20 +26,20 @@ local function update(s)
 end
 function WhetherExistTXTFile(dirs)
 
-    file = File(dirs);
+  file = File(dirs);
 
-    filelist = file.listFiles();
+  filelist = file.listFiles();
 
-    for k,f in pairs(luajava.astable(filelist))
-      filename = f.getName();
-      if(string.match(filename,".*%.(apk)"))
+  for k,f in pairs(luajava.astable(filelist))
+    filename = f.getName();
+    if(string.match(filename,".*%.(apk)"))
 
 
-        return true;
-      end
+      return true;
     end
-    return false;
   end
+  return false;
+end
 local function callback(s)
   LuaUtil.rmDir(File(activity.getLuaExtDir("bin/.temp")))
   bin_dlg.hide()
@@ -79,7 +80,8 @@ local function binapk(luapath, apkpath)
   import "mao.util.*"
   import "mao.res.*"
   import "apksigner.*"
-  local b = byte[2 ^ 16]
+  local b = byte[65536]
+  -----2 ^ 16
   local function copy(input, output)
     LuaUtil.copyFile(input, output)
     input.close()
@@ -110,6 +112,7 @@ local function binapk(luapath, apkpath)
   local code = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0).versionCode
 
   --local zip=ZipFile(info.publicSourceDir)
+
   local zipFile = File(info.publicSourceDir)
   local fis = FileInputStream(zipFile);
   --local checksum = CheckedInputStream(fis, Adler32());
@@ -214,6 +217,7 @@ local function binapk(luapath, apkpath)
          elseif name:find("%.lua$") then
           checklib(luapath .. dir .. name)
           local path, err = console.build(luapath .. dir .. name)
+
           if path then
 
 
@@ -261,7 +265,7 @@ local function binapk(luapath, apkpath)
       end
     end
   end
-  
+
 
   this.update("正在编译...");
   if f.isDirectory() then
@@ -292,7 +296,7 @@ local function binapk(luapath, apkpath)
     if not ss then
       table.insert(errbuffer, ee)
     end
-  
+
     --print(ee,dump(errbuffer),dump(replace))
     if File(luapath.."so").isDirectory()
       --添加用户自定义so
@@ -340,6 +344,7 @@ local function binapk(luapath, apkpath)
   for name, v in pairs(lualib) do
     local path, err = console.build(v)
     if path then
+
       local entry = ZipEntry(name)
       out.putNextEntry(entry)
       copy(FileInputStream(File(path)), out)
@@ -381,8 +386,7 @@ local function binapk(luapath, apkpath)
         end
         local list = ArrayList()
         local xml = AXmlDecoder.read(list, zis)
-       
-      
+
         local req = {
           [activity.getPackageName()] = packagename,
           [info.nonLocalizedLabel] = appname,
@@ -403,9 +407,9 @@ local function binapk(luapath, apkpath)
           end
         end
         local pt = activity.getLuaPath(".tmp")
+
         local fo = FileOutputStream(pt)
         xml.write(list, fo)
-        
         local code = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0).versionCode
         fo.close()
         local f = io.open(pt)
@@ -413,21 +417,26 @@ local function binapk(luapath, apkpath)
         f:close()
         s = string.gsub(s, touint32(code), touint32(tointeger(appcode) or 1),1)
         s = string.gsub(s, touint32(18), touint32(tointeger(appsdk) or 18),1)
-
+        s = string.gsub(s, touint32(23), touint32(tointeger(appSdk_target) or 23),1)
         local f = io.open(pt, "w")
         f:write(s)
+
         f:close()
         local fi = FileInputStream(pt)
         copy(fi, out)
         os.remove(pt)
+
        elseif not entry.isDirectory() then
         copy2(zis, out)
       end
     end
     entry = zis.getNextEntry()
+
   end
   out.setComment(table.concat(md5s))
   --print(table.concat(md5s,"/n"))
+
+  
   zis.close();
   out.closeEntry()
   out.close()
@@ -437,11 +446,12 @@ local function binapk(luapath, apkpath)
     if user_apsiner_a
       user_apsiner_a(tmp, apkpath)
      else
+
       os.remove(apkpath)
       Signer.sign(tmp, apkpath)
- end
+    end
 
-  
+
     if user_apsiner_b
       user_apsiner_b(apkpath)
     end

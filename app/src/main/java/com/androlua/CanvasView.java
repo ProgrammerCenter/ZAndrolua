@@ -10,6 +10,7 @@ import android.widget.*;
 import java.util.*;
 import java.util.regex.*;
 import android.widget.AutoCompleteTextView.*;
+import java.io.*;
 public class CanvasView extends View{
 private int ViewHeight;
 private int ViewWidth;
@@ -62,6 +63,7 @@ public void onDraw(Canvas canvas){
 	}
 	else
 	{
+		
 	  canvas.drawColor(Canvasbackground);
 	  }
 	}
@@ -87,13 +89,12 @@ public void setBackground(LuaFunction func)
 	this.Draw(func);
 	
 }
-public void setCanvasbackground(Bitmap Canvasbackgrounds)
+public void setCanvasbackground(Bitmap Canvasbackgrounds) 
 {
 	
 	
 	Canvasbackground=Canvasbackgrounds;
-	
-	
+    
 }
 public void Draw(LuaFunction func)
 {
