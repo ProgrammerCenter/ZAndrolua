@@ -24,7 +24,7 @@ luaproject=projectdir.."/init.lua"
 app={}
 loadfile(luaproject,"bt",app)()
 appname.Text=app.appname or "AndroLua"
-appTargetSdk.Text=app.appSdk_target or "23"
+appTargetSdk.Text=app.appSdk_target or ""
 appcode.Text=app.appcode or "1"
 appsdk.Text=app.appsdk or "15"
 path_pattern.Text=app.path_pattern or ""

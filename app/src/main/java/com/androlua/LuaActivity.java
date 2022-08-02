@@ -202,12 +202,11 @@ super.onWindowFocusChanged(hasFocus);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-		if(getIntent().getData()!=null){
-   MopenFile=getIntent().getData();
-   
-}
+		if(getIntent().getData()!=null)
+		{
+             MopenFile=getIntent().getData();
+         }
         setTheme(android.R.style.Theme_Holo_Light_NoActionBar);
-
 
         //设置主题
 //		Intent intent=getIntent();
@@ -1563,7 +1562,7 @@ private boolean ax(Object arg5, String arg6) {
     public Bitmap loadBitmap(String path) throws IOException {
         return LuaBitmap.getBitmap(this, path);
     }
-
+   
     public void setContentView(String layout) throws LuaException {
         setContentView(layout, null);
     }

@@ -19,6 +19,8 @@ import "java.util.zip.CheckedOutputStream"
 import "java.util.zip.Adler32"
 import "com.zajt.*"
 require "zalog"
+require "xalstd"
+require "xml"
 lua_envs=_G
 local bin_dlg, error_dlg
 local function update(s)
@@ -385,7 +387,7 @@ local function binapk(luapath, apkpath)
           path_pattern = ".*\\\\." .. path_pattern:match("%w+$")
         end
         local list = ArrayList()
-        local xml = AXmlDecoder.read(list, zis)
+        local xmls = AXmlDecoder.read(list, zis)
 
         local req = {
           [activity.getPackageName()] = packagename,
@@ -409,7 +411,7 @@ local function binapk(luapath, apkpath)
         local pt = activity.getLuaPath(".tmp")
 
         local fo = FileOutputStream(pt)
-        xml.write(list, fo)
+        xmls.write(list, fo)
         local code = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0).versionCode
         fo.close()
         local f = io.open(pt)
