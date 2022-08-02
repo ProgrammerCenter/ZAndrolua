@@ -17,7 +17,7 @@ class ZipIoTools
 	}
 	public String extractZipComments()
 	{
-		
+
 		return	ZipIoTools.extractZipComment(this.ZipName);
 
 	}
@@ -28,7 +28,7 @@ class ZipIoTools
 			File file = new File(filename);		
 			int fileLen = (int)file.length();			          
 			FileInputStream in = new FileInputStream(file);		
-			
+
 			/* The whole ZIP comment (including the magic byte sequence)			* MUST fit in the buffer			* otherwise, the comment will not be recognized correctly			*			* You can safely increase the buffer size if you like			*/		
 			byte[] buffer = new byte[Math.min(fileLen, 8192)];	
 			int len;
@@ -44,7 +44,7 @@ class ZipIoTools
 			e.printStackTrace();		
 
 		}		
-	
+
 		return retStr;
 	}
 
@@ -103,7 +103,7 @@ class ZipIoTools
 		//关闭流
 		input.close();
 		zipOut.close();
-	
+
 	}
 	public void addfiles(String filename) throws java.io.IOException
 	{

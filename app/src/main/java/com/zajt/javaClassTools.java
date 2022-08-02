@@ -5,12 +5,12 @@ import com.zajt.MainjavaTools;
 import javax.microedition.khronos.*;
 public class  javaClassTools extends MainjavaTools
 {
-   
+
 	public static List<String>   getClassAttribute(Class cls)
 	{
 
 		List<String> arrayx = new ArrayList<String>();
-      
+
         //得到所有属性
         Field[] fields = cls.getDeclaredFields();
         for (int i = 0; i < fields.length; i++)
@@ -61,7 +61,7 @@ public class  javaClassTools extends MainjavaTools
 
 			//得到属性
 			Field field = fields[i];
-		
+
 			//打开私有访问
 			field.setAccessible(true);
 			//获取属性
