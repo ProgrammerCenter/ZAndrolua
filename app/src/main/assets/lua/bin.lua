@@ -424,6 +424,7 @@ local function binapk(luapath, apkpath)
         f:write(s)
 
         f:close()
+        
         local fi = FileInputStream(pt)
         copy(fi, out)
         os.remove(pt)
