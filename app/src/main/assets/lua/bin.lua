@@ -79,6 +79,7 @@ local function binapk(luapath, apkpath)
   compile "sign"
   import "java.util.zip.*"
   import "java.io.*"
+  xml=require "xml"
   import "mao.util.*"
   import "mao.res.*"
   import "apksigner.*"
@@ -408,7 +409,7 @@ local function binapk(luapath, apkpath)
             end
           end
         end
-        local pt = activity.getLuaPath(".tmp")
+        local pt =activity.getLuaPath(".tmp")
 
         local fo = FileOutputStream(pt)
         xmls.write(list, fo)
@@ -422,9 +423,8 @@ local function binapk(luapath, apkpath)
         s = string.gsub(s, touint32(23), touint32(tointeger(appSdk_target) or 23),1)
         local f = io.open(pt, "w")
         f:write(s)
-
         f:close()
-        
+
         local fi = FileInputStream(pt)
         copy(fi, out)
         os.remove(pt)
@@ -439,7 +439,7 @@ local function binapk(luapath, apkpath)
   out.setComment(table.concat(md5s))
   --print(table.concat(md5s,"/n"))
 
-  
+
   zis.close();
   out.closeEntry()
   out.close()

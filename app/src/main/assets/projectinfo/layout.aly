@@ -1,22 +1,22 @@
 {
-  ScrollView,
+  ScrollView;
   layout_width="fill";
   {
     LinearLayout;
     orientation="vertical";
     {
       GridLayout;
-      orientation="horizontal";
       layout_width="fill";
       columnCount="2";
+      orientation="horizontal";
       {
         TextView;
         text="名称";
       };
       {
         EditText;
-        id="appname";
         layout_width="fill";
+        id="appname";
         singleLine="true";
       };
       {
@@ -25,8 +25,8 @@
       };
       {
         EditText;
-        id="appver";
         layout_width="fill";
+        id="appver";
         singleLine="true";
       };
       {
@@ -35,8 +35,8 @@
       };
       {
         EditText;
-        id="appcode";
         layout_width="fill";
+        id="appcode";
         singleLine="true";
       };
       {
@@ -45,8 +45,9 @@
       };
       {
         EditText;
-        id="appTargetSdk";
         layout_width="fill";
+        id="appTargetSdk";
+        InputType="numberDecimal";
         singleLine="true";
       };
       {
@@ -55,9 +56,10 @@
       };
       {
         EditText;
-        id="appsdk";
         layout_width="fill";
+        id="appsdk";
         singleLine="true";
+        InputType="numberDecimal";
       };
       {
         TextView;
@@ -65,8 +67,8 @@
       };
       {
         EditText;
-        id="path_pattern";
         layout_width="fill";
+        id="path_pattern";
         singleLine="true";
       };
       {
@@ -75,8 +77,8 @@
       };
       {
         EditText;
-        id="packagename";
         layout_width="fill";
+        id="packagename";
         singleLine="true";
       };
       {
@@ -85,8 +87,8 @@
       };
       {
         EditText;
-        id="app_key";
         layout_width="fill";
+        id="app_key";
         singleLine="true";
       };
       {
@@ -95,8 +97,8 @@
       };
       {
         EditText;
-        id="app_channel";
         layout_width="fill";
+        id="app_channel";
         singleLine="true";
       };
       {
@@ -105,8 +107,8 @@
       };
       {
         EditText;
-        id="developer";
         layout_width="fill";
+        id="developer";
         singleLine="true";
       };
       {
@@ -115,8 +117,8 @@
       };
       {
         EditText;
-        id="description";
         layout_width="fill";
+        id="description";
         singleLine="true";
       };
       {
@@ -130,19 +132,19 @@
     };
     {
       Switch;
+      layout_width="fill";
       id="debugmode";
       text="调试";
-      layout_width="fill";
     };
     {
       LinearLayout;
       layout_width="fill";
       {
         Button;
-        text="更改权限";
-        id="btn",
         layout_width="fill";
+        id="btn";
+        text="更改权限";
       };
     };
   };
-}
+};
