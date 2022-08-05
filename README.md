@@ -12,5 +12,6 @@ http://sf.net/p/androlua
 点击链接支持Androlua作者的工作，一块也可以哦：  
 https://qr.alipay.com/apt7ujjb4jngmu3z9a  
 
-文档在这里: [ZAndrolua文档](https://github.com/MGLSIDE/ZAndrolua/blob/master/AppDoc/doc.md)
+文档在这里: [ZAndrolua文档](https://github.com/MGLSIDE/ZAndrolua/blob/master/AppDoc/doc.md)   
+教程在这里: [ZAndrolua教程](https://github.com/MGLSIDE/ZAndrolua_Tutorial/blob/main/main.md)
 
