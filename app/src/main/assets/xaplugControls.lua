@@ -65,21 +65,21 @@ xaplugControls.xaplugControl=function()
   wm.addView(btn,wp)
   idsx.btn.title.getPaint().setFakeBoldText(true)
   idsx.btn.title.onClick=function ()
-    单选列表=xapluglist_b
+    选择列表=xapluglist_b
     function xaplugmenu_fun(MenuNames,MenuonClicks)
-      
-   xpalugmenu[MenuNames]=true
-   if(MenuonClicks)
-     menuobjs.add(MenuNames).onMenuItemClick=
-     MenuonClicks
-     else
-     menuobjs.add(MenuNames)
-     end
+
+      xpalugmenu[MenuNames]=true
+      if(MenuonClicks)
+        menuobjs.add(MenuNames).onMenuItemClick=
+        MenuonClicks
+       else
+        menuobjs.add(MenuNames)
       end
-    
-    local 单选对话框=AlertDialog.Builder(this)
+    end
+
+    local 选择对话框=AlertDialog.Builder(this)
     .setTitle("xa专属类型插件列表")
-    .setSingleChoiceItems(单选列表,-1,{onClick=function(v,p)
+    .setMultiChoiceItems(选择列表,nil,{onClick=function(v,p)
         function getdebugis()
           if(debugisvar==true)
             then
@@ -94,10 +94,10 @@ xaplugControls.xaplugControl=function()
         Plug_inloading.pelf.plugfilename="/storage/emulated/0/AndroLua/xaplug/"..xapluglist_c[p+1]..
         "/mains.lua"
         plugExecutable=loadstring(text_Inputs_xaplugControls(Plug_inloading.pelf.plugfilename))
-    
-      plugExecutable()
+
+        plugExecutable()
 
     end})
-    单选对话框.show();
+    选择对话框.show();
   end
 end

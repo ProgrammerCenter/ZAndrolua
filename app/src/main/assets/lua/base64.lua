@@ -15,7 +15,9 @@ function encode(data)
    local bytes = {}
    local result = ""
    for i = 0, data:len()-1, 3 do
-      for byte = 1, 3 do bytes[byte] = string.byte(data:sub(i+byte)) or 0 end
+      for byte = 1, 3 do
+         bytes[byte] = string.byte(data:sub(i+byte)) or 0 
+        end
       result = 
          string.format( '%s%s%s%s%s', 
             result, 

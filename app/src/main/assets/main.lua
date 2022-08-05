@@ -3,8 +3,8 @@ isFirstStart = base.getBoolean("isFirstStart",true);
 intent = nil;
 --代表第一次启动App
 if(isFirstStart)
- luajava.bindClass("com.androlua.LuaUtil").copyDir("/data/user/0/"..activity.getPackageName().."/files/lua/",
-      "/data/user/0/"..activity.getPackageName().."/app_lua/" )
+  luajava.bindClass("com.androlua.LuaUtil").copyDir("/data/user/0/"..activity.getPackageName().."/files/lua/",
+  "/data/user/0/"..activity.getPackageName().."/app_lua/" )
   editor = base.edit();
   editor.putBoolean("isFirstStart",false);
   editor.commit();
@@ -1054,6 +1054,9 @@ end
 func.navi = function()
   create_navi_dlg()
   local str = editor.getText().toString()
+  str=string.gsub(str,[==[".-"]==],"")
+  str=string.gsub(str,"%[%[.-%]%]","")
+  str=string.gsub(str,"%[==%[.-%]==%]","")
   local fs = {}
   indexs = {}
   for s, i in str:gmatch("([%w%._]* *=? *function *[%w%._]*%b())()") do
