@@ -13,9 +13,8 @@ public class Main extends LuaActivity
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		if(getIntent().getData()!=null){
-			
-		MopenFile=getIntent().getData();}
-		
+		MopenFile=getIntent().getData();
+		}
 		super.onCreate(savedInstanceState);
 		if(savedInstanceState==null && getIntent().getData()!=null)
 			runFunc("onNewIntent", getIntent());

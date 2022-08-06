@@ -13,5 +13,4 @@ http://sf.net/p/androlua
 https://qr.alipay.com/apt7ujjb4jngmu3z9a  
 
 文档在这里: [ZAndrolua文档](https://github.com/MGLSIDE/ZAndrolua/blob/master/AppDoc/doc.md)   
-教程在这里: [ZAndrolua教程](https://github.com/MGLSIDE/ZAndrolua_Tutorial/blob/main/main.md)
 

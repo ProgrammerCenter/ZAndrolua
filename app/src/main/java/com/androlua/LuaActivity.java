@@ -272,6 +272,7 @@ super.onWindowFocusChanged(hasFocus);
             status.setText("");
             adapter.clear();
             Intent intent = getIntent();
+			
             Object[] arg = (Object[]) intent.getSerializableExtra(ARG);
             if (arg == null)
                 arg = new Object[0];
