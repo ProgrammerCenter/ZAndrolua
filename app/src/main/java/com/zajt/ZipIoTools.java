@@ -5,22 +5,6 @@ import java.util.zip.ZipOutputStream;
 import java.io.*;
 class ZipIoTools
 {
-	private String ZipName="";
-
-	public ZipIoTools(String paths)
-	{
-
-		this.ZipName = paths;
-
-
-
-	}
-	public String extractZipComments()
-	{
-
-		return	ZipIoTools.extractZipComment(this.ZipName);
-
-	}
 	public   static    String extractZipComment(String filename)
 	{			String retStr = null;	
 		try
@@ -103,11 +87,6 @@ class ZipIoTools
 		//关闭流
 		input.close();
 		zipOut.close();
-
-	}
-	public void addfiles(String filename) throws java.io.IOException
-	{
-		ZipIoTools.addfile(this.ZipName, filename);
 
 	}
 

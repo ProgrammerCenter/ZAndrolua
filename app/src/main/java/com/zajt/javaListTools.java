@@ -5,6 +5,7 @@ public class javaListTools extends MainjavaTools
 
 	static   public <T> List<List<T>> cartesianProduct(T[]... sets)
 	{
+		new java.util.HashMap();
         if (sets == null || sets.length == 0)
 		{
             return Collections.emptyList();
