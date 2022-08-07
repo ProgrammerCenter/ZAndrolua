@@ -1,4 +1,4 @@
-# 导入java类 #
+##### 导入java类 #####
 第1种方法:   
 使用import "类的包名+类名"。   
 注意！import函数要先用require "import"导入之后才能使用。
@@ -17,7 +17,7 @@ print(tv)
 ```
 以上代码也会输出class android.widget.TextView这个字符串。
 
-# 创建Java对象 #
+##### 创建Java对象 #####
 第1种:
 使用import函数导入java类之后，使用类名(构造函数参数)创建对象     
 举例:
@@ -34,7 +34,7 @@ tv=tc(activity)
 ```
 注意！以上所述的activity即指当前activity对象，ZAndrolua会自动根据传入的参数选择构造方法。
 
-# 调用java类和对象方法与属性 # 
+##### 调用java类和对象方法与属性 ##### 
      
       
 调用类的静态属性(static权限符修饰的属性):   
@@ -97,7 +97,7 @@ File是java的文件对象类，用于处理文件路径和文件名称，getNam
  调用java类对象的属性(即没有static权限修饰符修饰的属性):       
            对象.属性名称     
  这里就不举例了，至于如何使用就是相当于把上面的对象方法调用去掉()和参数。     
- #   创建Java数组  #
+ #####   创建Java数组  #####
  对于基本类型的java数组，可以通过基本类型名称[数组长度]的方式创建.    
  举例:     
 ```Lua
@@ -116,13 +116,13 @@ a=TextView[5]
 tv=luajava.bindClass "android.widget.TextView"
 a=tv[5]
 ```
-# 转换java Map、list、array为lua表 #
+##### 转换java Map、list、array为lua表 #####
 luajava.astable(javaMap/javaArray/javaList)返回一个lua table。   
 举例:    
 ```
 vt=luajava.astable(int[5])
 ```
-# 销毁java对象 #
+##### 销毁java对象 #####
 使用luajava.clear来销毁对象。   
 举例:    
 ```Lua

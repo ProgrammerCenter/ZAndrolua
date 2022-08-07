@@ -33,6 +33,7 @@ public class LuaDialog extends AlertDialog implements  DialogInterface.OnClickLi
     public LuaDialog(Context context) {
         super(context);
         mContext = context;
+	
         mListView = new ListView(mContext);
     }
 
