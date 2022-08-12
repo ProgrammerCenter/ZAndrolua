@@ -299,19 +299,20 @@ local function binapk(luapath, apkpath)
     if not ss then
       table.insert(errbuffer, ee)
     end
+    local z1sf
+    local z1s
 
     --print(ee,dump(errbuffer),dump(replace))
     if File(luapath.."so").isDirectory()
       --添加用户自定义so
       lpats=luajava.astable(File(luapath.."so").list())
-      lpats2={}
       for k,v in ipairs(lpats)
-
-        if File(luapath.."so/"..tostring(lpats[k]).."/").isDirectory()
-          z1s=luajava.astable(File(luapath.."so/"..tostring(lpats[k]).."/").listFiles())
+        z1sf=File(luapath.."so/"..tostring(lpats[k]).."/")
+        if z1sf.isDirectory()
+          z1s=z1sf.listFiles()
           for k2,v2 in ipairs(z1s)
 
-            local welx = File(tostring(z1s[k2]))
+            local welx = z1s[k2]
 
             local entry = ZipEntry("lib/"..tostring(lpats[k]).."/"..z1s[k2].getName())
             out.putNextEntry(entry)
