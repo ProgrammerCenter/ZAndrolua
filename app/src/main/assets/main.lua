@@ -703,6 +703,18 @@ function IsInTable(value, tbl)
   return false;
 end
 function list(v, p)
+  local FileSuffix={
+    ["lua"]=true,
+    ["alp"]=true,
+    ["html"]=true,
+    ["png"]=true,
+    ["dex"]=true,
+    ["aly"]=true,
+    ["so"]=true,
+    ["pk8"]=true,
+    ["xacf"]=true
+  }
+--显示的文件的后缀名类型。
   local f = File(p)
   if not f then
     open_title.setText(p)
@@ -725,11 +737,10 @@ function list(v, p)
     local name = fs[n].getName()
     if fs[n].isDirectory() then
       table.insert(td, name .. "/")
-     elseif
-      name:find("%.lua$") or name:find("%.png$")
-      or name:find("%.html$") or name:find("%.aly$") or name:find("%.alp$") or
-      name:find("%.dex$") or name:find("%.xacf$")or name:find("%.pk8$")
-      then
+     elseif FileSuffix[name:match("%.(.+)$")]==true
+     
+       then
+      
       table.insert(tf, name)
     end
   end

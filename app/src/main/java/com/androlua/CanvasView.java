@@ -22,7 +22,7 @@ public class CanvasView extends View
 	private boolean islua=false;
 	public Object Canvasbackground=0;
 
-	public CanvasView(Context context, AttributeSet attrs)
+	public CanvasView(Context context,    AttributeSet attrs)
 	{
 		//Attribute属性，布局文件里设置的自定义属性
 		//attrs必须传给父类，好让父类知道具体要绘制的参数

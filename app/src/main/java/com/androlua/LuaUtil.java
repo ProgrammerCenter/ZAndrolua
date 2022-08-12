@@ -41,6 +41,7 @@ import java.util.zip.ZipOutputStream;
 import dalvik.system.DexFile;
 
 import static java.io.File.separator;
+import android.text.*;
 
 public class LuaUtil {
     /**
@@ -51,6 +52,7 @@ public class LuaUtil {
      */
     public static Bitmap captureScreen(Activity activity) {
 // 获取屏幕大小：
+		
         DisplayMetrics metrics = new DisplayMetrics();
         WindowManager WM = (WindowManager) activity
                 .getSystemService(Context.WINDOW_SERVICE);

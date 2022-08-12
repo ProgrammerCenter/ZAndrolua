@@ -4,7 +4,7 @@ xalstd.string={}
 xalstd.math={}
 xalstd.net={}
 function xalstd.net.getHtmls(Websites,Callfunc)
-  require "socket"
+  local socket=require "socket"
   local http=require'http'
   if Callfunc
     Callfunc()
@@ -446,7 +446,7 @@ function xalstd.table.merge( tDest, tSrc )
     tDest[k] = v
   end
 end
-function xalstd.files.Share_Files(path)
+function xalstd.files.ShareFiles(path)
   if(Build.VERSION.SDK_INT >= 24)
     import "android.webkit.MimeTypeMap"
     import "android.content.Intent"
