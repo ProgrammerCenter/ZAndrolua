@@ -45,8 +45,8 @@ xalstd.table.rep=function(V,Times)
   return retT
 end
 
- function xalstd.table.New_Stack()
-   --栈
+function xalstd.table.New_Stack()
+  --栈
   local stack = {
     tableList = {}
   }
@@ -447,12 +447,12 @@ function xalstd.table.merge( tDest, tSrc )
   end
 end
 function xalstd.files.ShareFiles(path)
+  Uri=luajava.bindClass"android.net.Uri"
+  File=luajava.bindClass "java.io.File"
+  MimeTypeMap=luajava.bindClass"android.webkit.MimeTypeMap"
+  Intent=luajava.bindClass "android.content.Intent"
   if(Build.VERSION.SDK_INT >= 24)
-    import "android.webkit.MimeTypeMap"
-    import "android.content.Intent"
-    import "android.net.Uri"
-    import "java.io.File"
-    import "android.content.FileProvider"
+    FileProvider=luajava.bindClass "android.content.FileProvider"
     intent = Intent()
     intent.setAction(Intent.ACTION_SEND)
     intent.setType("*/*")
@@ -461,10 +461,6 @@ function xalstd.files.ShareFiles(path)
     intent.putExtra(Intent.EXTRA_STREAM,uri)
     activity.startActivity(Intent.createChooser(intent, "分享到:"))
    else
-    import "android.webkit.MimeTypeMap"
-    import "android.content.Intent"
-    import "android.net.Uri"
-    import "java.io.File"
     FileName=tostring(File(path).Name)
     ExtensionName=FileName:match("%.(.+)")
     Mime=MimeTypeMap.getSingleton().getMimeTypeFromExtension(ExtensionName)
