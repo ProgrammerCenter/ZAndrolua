@@ -1,0 +1,12 @@
+{
+  LinearLayout;
+  layout_height="fill";
+  layout_width="fill";
+  orientation="vertical";
+  {
+    ListView;
+    id="lv";
+    layout_height="fill";
+    layout_width="fill";
+  };
+};
